@@ -16,6 +16,12 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('age');
+            $table->enum('gender', ['M', 'F']);
+            $table->string('address');
+            $table->string('phone_number',10);
+            $table->string('email')->nullable();
+            $table->enum('preffered_time',['morning 3:00-4:30','afternoon 8:00-9:30']);
             $table->enum('status',['junior','senior']);
             $table->timestamps();
         });

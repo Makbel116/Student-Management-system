@@ -14,10 +14,11 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
+            //images if needed
             $table->id();
             $table->string('name');
             $table->integer('age');
-            $table->enum('gender', ['male', 'female']);
+            $table->enum('gender', ['M', 'F']);
             $table->string('address');
             $table->string('phone_number',10);
             $table->string('email')->nullable();
@@ -25,6 +26,7 @@ class CreateStudentsTable extends Migration
             $table->enum('preffered_time',['morning 3:00-4:30','afternoon 8:00-9:30']);
             $table->string('recommended_by');
             $table->foreignId('course_id')->constrained();
+            $table->foreignId('teacher_id')->constrained();
             $table->timestamps();
         });
     }

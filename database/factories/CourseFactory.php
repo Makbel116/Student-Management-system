@@ -15,10 +15,10 @@ class CourseFactory extends Factory
     {
         return [
             //
-            'name'=>$this->faker->name,
+            'name'=>$this->faker->randomElement(['laravel','backend','flutter','react']),
             'co-ordinator'=>$this->faker->name,
             'place'=>"megenagna",
-
+            'time'=>$this->faker->randomElement(['morning 3:00-4:30','afternoon 8:00-9:30'])
         ];
     }
 }

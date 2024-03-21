@@ -17,13 +17,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $teacher=Teacher::factory()->create();
-        $course=Course::factory()->create([
-            'teached_by'=>$teacher->id
-        ]);
-        Student::factory()->create([
-            'course_id'=>$course->id
-        ]);
+        $teachers=Teacher::factory(6)->create();
+        $courses=Course::factory(6)->create();
+        for ($i=0; $i <6 ; $i++) { 
+            # code...
+            Student::factory(2)->create([
+                'teacher_id'=>$teachers[$i]->id,
+                'course_id'=>$courses[$i]->id
+            ]);
+        }
         
     }
 }

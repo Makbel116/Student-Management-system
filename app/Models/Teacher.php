@@ -10,6 +10,6 @@ class Teacher extends Model
     use HasFactory;
 
     public function course(){
-        return $this->hasMany(Teacher::class);
+        return $this->hasMany(Course::class);
     }
 }

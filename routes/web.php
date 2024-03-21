@@ -1,6 +1,12 @@
 <?php
 
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
+use App\Models\Student;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +19,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+//to get the home page(
+
+Route::get('/',[UserController::class,'index']);
+
+//to get the list of students
+Route::get('/students', [StudentController::class,'index']);
+
+
+//to get the list of courses
+Route::get('/courses', [CourseController::class,'index']);
+
+
+//to get the list of teachers
+Route::get('/teachers', [TeacherController::class,'index']);

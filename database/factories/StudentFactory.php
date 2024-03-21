@@ -17,9 +17,9 @@ class StudentFactory extends Factory
             //
             'name' =>$this->faker->name,
             'age'=>$this->faker->numberBetween(15,45),
-            'gender'=>$this->faker->randomElement(['male','female']),
+            'gender'=>$this->faker->randomElement(['M','F']),
             'address' =>$this->faker->address,
-            'phone_number'=>$this->faker->numberBetween(900000000,9999999999),
+            'phone_number'=>'0943031703',
             'email'=>$this->faker->email,
             'status'=>$this->faker->randomElement(['fresh','junior','senior']),
             'preffered_time'=>$this->faker->randomElement(['morning 3:00-4:30','afternoon 8:00-9:30']),
