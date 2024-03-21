@@ -1,25 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Omishitu joy</title>
-        <!-- loading the bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-        </script>
-        {{-- loading alpinejs --}}
-        <script src="//unpkg.com/alpinejs" defer></script>
-        <!-- loading the css file -->
-        <link rel="stylesheet" type="text/css" href="{{asset('css/dashboard.css')}}" />
-        <!-- loading the font-awesome icos  -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    </head>
+   @include('partials._head')
 <body>
     <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Omishitu joy</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="/">Omishitu joy</a>
       
         <ul class="navbar-nav flex-row d-md-none">
           <li class="nav-item text-nowrap">
@@ -90,9 +74,12 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                      Sign out
-                    </a>
+                    <form action="/logout" method="POST">
+                    @csrf
+                      <button  class="nav-link d-flex align-items-center gap-2" role="button" type="submit">
+                        Sign out
+                      </button>
+                    </form>
                   </li>
                 </ul>
               </div>
@@ -109,12 +96,5 @@
           </main>
         </div>
       </div>
-    <footer>
-
-    </footer>
-</body>
-  <!-- loading the js file -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-</html>
+  @include('partials._footer')
 

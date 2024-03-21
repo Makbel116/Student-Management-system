@@ -20,17 +20,29 @@ use App\Models\Student;
 */
 
 
-//to get the home page(
+//to get the home page
 
-Route::get('/',[UserController::class,'index']);
+Route::get('/',[UserController::class,'index'])->middleware('auth');
+
+//to get to the login page
+
+Route::get('/login',[UserController::class,'login'])->middleware('guest')->name('login');
+
+//user authentcation to login
+
+Route::post("/user/authentcation",[UserController::class,'authentcation']);
+
+//user logout
+
+Route::post("/logout",[UserController::class,'logout']);
 
 //to get the list of students
-Route::get('/students', [StudentController::class,'index']);
+Route::get('/students', [StudentController::class,'index'])->middleware('auth');
 
 
 //to get the list of courses
-Route::get('/courses', [CourseController::class,'index']);
+Route::get('/courses', [CourseController::class,'index'])->middleware('auth');
 
 
 //to get the list of teachers
-Route::get('/teachers', [TeacherController::class,'index']);
+Route::get('/teachers', [TeacherController::class,'index'])->middleware('auth');
