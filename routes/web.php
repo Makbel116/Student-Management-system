@@ -69,6 +69,10 @@ Route::post('/course/store',[CourseController::class,'store'])->middleware('auth
 //to get the list of teachers
 Route::get('/teachers', [TeacherController::class,'index'])->middleware('auth');
 
-//to create a Student
+//to show the registeratio page for teachers
 
 Route::get('/teacher/register',[TeacherController::class,'create'])->middleware('auth');
+
+//to store the teacher
+
+Route::post('/teacher/store',[TeacherController::class,'store'])->middleware('auth');

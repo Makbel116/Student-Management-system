@@ -14,8 +14,8 @@
                     <th scope="col">gender</th>
                     {{-- students only --}}
                     @if ($title == 'Student')
-                        <th scope="col">Teacher</th>
-                        <th scope="col">Course</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Teacher</th>
                         {{-- teachers only --}}
                     @else
                         <th scope="col">Status</th>
@@ -24,6 +24,7 @@
                     {{-- courses only --}}
                 @else
                     <th scope="col">Place</th>
+                    <th scope="col">Teacher</th>
                     <th scope="col">Time</th>
                 @endif
             </tr>
@@ -39,8 +40,8 @@
                         <td>{{ $eachRow->gender }}</td>
                         {{-- students only --}}
                         @if ($title == 'Student')
-                            <td>{{ $eachRow->course->teacher->name }}</td>
-                            <td>{{ $eachRow->course->name }}</td>
+                        <td>{{ $eachRow->course->name }}</td>
+                        <td>{{ $eachRow->course->teacher->name }}</td>
                             {{-- teachers only --}}
                         @else
                             <td>{{ $eachRow->status }}</td>
@@ -48,7 +49,8 @@
                         @endif
                         {{-- courses only --}}
                     @else
-                        <td>{{ $eachRow->place }}</td>
+                    <td>{{ $eachRow->place }}</td>
+                    <td>{{ $eachRow->teacher->name }}</td>
                         <td>{{ $eachRow->time }}</td>
                     @endif
                 </tr>

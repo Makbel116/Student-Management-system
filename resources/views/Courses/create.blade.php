@@ -22,7 +22,7 @@
         </div>
 
 
-        {{-- form to register the user --}}
+        {{-- form to register the course --}}
         <form class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 mb-0" action="/course/store" method="POST">
             @csrf
 

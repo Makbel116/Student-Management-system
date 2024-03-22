@@ -18,11 +18,11 @@ class CreateTeachersTable extends Migration
             $table->string('name');
             $table->integer('age');
             $table->enum('gender', ['M', 'F']);
-            $table->string('address');
-            $table->string('phone_number',10);
-            $table->string('email')->nullable();
-            $table->enum('preffered_time',['morning 3:00-4:30','afternoon 8:00-9:30']);
-            $table->enum('status',['junior','senior']);
+            $table->string('location');
+            $table->string('phone_number');
+            $table->string('email');
+            $table->enum('preffered_time',['Morning','Afternoon']);
+            $table->enum('status',['Junior','Senior']);
             $table->timestamps();
         });
     }
