@@ -6,6 +6,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
+use App\Models\Course;
 use App\Models\Student;
 
 /*
@@ -36,13 +37,34 @@ Route::post("/user/authentcation",[UserController::class,'authentcation']);
 
 Route::post("/logout",[UserController::class,'logout']);
 
+
+//students
+
 //to get the list of students
 Route::get('/students', [StudentController::class,'index'])->middleware('auth');
 
+//to show a Student registeration page
+
+Route::get('/student/register',[StudentController::class,'create'])->middleware('auth');
+
+//to store the student
+
+Route::post('/student/store',[StudentController::class,'store'])->middleware('auth');
+
+//courses
 
 //to get the list of courses
 Route::get('/courses', [CourseController::class,'index'])->middleware('auth');
 
+//to create a course
+
+Route::get('/course/register',[CourseController::class,'create'])->middleware('auth');
+
+//teachers
 
 //to get the list of teachers
 Route::get('/teachers', [TeacherController::class,'index'])->middleware('auth');
+
+//to create a Student
+
+Route::get('/teacher/register',[TeacherController::class,'create'])->middleware('auth');

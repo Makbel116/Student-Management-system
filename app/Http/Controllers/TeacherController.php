@@ -12,4 +12,8 @@ class TeacherController extends Controller
         
         return view("Teachers.index",["teachers"=>Teacher::latest()->get(),"title"=>"Teacher List"]);
    }
+   public function create(){
+        
+    return view("Teacher.create",);
+}
 }

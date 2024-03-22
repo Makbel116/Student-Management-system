@@ -19,6 +19,7 @@ class CreateCoursesTable extends Migration
             $table->string('co-ordinator');
             $table->string('place');
             $table->string('time');
+            $table->foreignId('teacher_id')->constrained();
             $table->timestamps();
         });
     }

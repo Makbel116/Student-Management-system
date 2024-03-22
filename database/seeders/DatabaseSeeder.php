@@ -18,12 +18,14 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(1)->create();
         $teachers=Teacher::factory(6)->create();
-        $courses=Course::factory(6)->create();
         for ($i=0; $i <6 ; $i++) { 
             # code...
-            Student::factory(2)->create([
+            $course=Course::factory()->create([
                 'teacher_id'=>$teachers[$i]->id,
-                'course_id'=>$courses[$i]->id
+
+            ]);
+            Student::factory(2)->create([
+                'course_id'=>$course->id
             ]);
         }
         

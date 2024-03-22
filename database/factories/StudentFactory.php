@@ -18,12 +18,13 @@ class StudentFactory extends Factory
             'name' =>$this->faker->name,
             'age'=>$this->faker->numberBetween(15,45),
             'gender'=>$this->faker->randomElement(['M','F']),
-            'address' =>$this->faker->address,
+            'location' =>$this->faker->randomElement(['Addis Ketema','Akaky Kaliti','Arada','Bole','Gullele','Kirkos','Kolfe Keraniyo','Lemi Kura','Lideta','Nifas Silk-Lafto','Yeka']),
             'phone_number'=>'0943031703',
             'email'=>$this->faker->email,
-            'status'=>$this->faker->randomElement(['fresh','junior','senior']),
-            'preffered_time'=>$this->faker->randomElement(['morning 3:00-4:30','afternoon 8:00-9:30']),
-            'recommended_by'=>$this->faker->sentence
+            'status'=>$this->faker->randomElement(['Fresh','Junior','Senior']),
+            'preffered_time'=>$this->faker->randomElement(['Morning','Afternoon']),
+            'recommendation'=>$this->faker->randomElement(['Friends','Online Course Advertisement','Online Reviews and Testimonials','Course Previews or Demos','Online Communities and Social
+            Media'])
         ];
     }
 }

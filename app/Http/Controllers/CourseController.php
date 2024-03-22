@@ -12,4 +12,8 @@ class CourseController extends Controller
     public function index(){
         return view ("Courses.index",['courses'=>Course::latest()->get(),'title'=>'Course List']);
     }
+    public function create(){
+        
+        return view("Course.create",);
+   }
 }

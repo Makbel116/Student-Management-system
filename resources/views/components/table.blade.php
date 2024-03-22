@@ -39,7 +39,7 @@
                         <td>{{ $eachRow->gender }}</td>
                         {{-- students only --}}
                         @if ($title == 'Student')
-                            <td>{{ $eachRow->teacher->name }}</td>
+                            <td>{{ $eachRow->course->teacher->name }}</td>
                             <td>{{ $eachRow->course->name }}</td>
                             {{-- teachers only --}}
                         @else

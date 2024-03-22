@@ -19,14 +19,13 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->integer('age');
             $table->enum('gender', ['M', 'F']);
-            $table->string('address');
+            $table->string('location');
             $table->string('phone_number',10);
             $table->string('email')->nullable();
-            $table->enum('status',['fresh','junior','senior']);
-            $table->enum('preffered_time',['morning 3:00-4:30','afternoon 8:00-9:30']);
-            $table->string('recommended_by');
+            $table->enum('status',['Fresh','Junior','Senior']);
+            $table->enum('preffered_time',['Morning','Afternoon']);
+            $table->string('recommendation')->nullable();
             $table->foreignId('course_id')->constrained();
-            $table->foreignId('teacher_id')->constrained();
             $table->timestamps();
         });
     }
