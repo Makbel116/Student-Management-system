@@ -56,9 +56,13 @@ Route::post('/student/store',[StudentController::class,'store'])->middleware('au
 //to get the list of courses
 Route::get('/courses', [CourseController::class,'index'])->middleware('auth');
 
-//to create a course
+//to show a course register page
 
 Route::get('/course/register',[CourseController::class,'create'])->middleware('auth');
+
+//to store created courses
+
+Route::post('/course/store',[CourseController::class,'store'])->middleware('auth');
 
 //teachers
 

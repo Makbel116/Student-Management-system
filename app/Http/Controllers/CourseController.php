@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
@@ -14,6 +16,20 @@ class CourseController extends Controller
     }
     public function create(){
         
-        return view("Course.create",);
+        return view("Courses.create",['teachers'=>Teacher::select('id', 'name')->get()]);
+   }
+
+   public function store(Request $request){
+    $formFields=$request->validate([
+        'name'=>['required',Rule::unique('courses','name')],
+        'place'=>'required',
+        'time'=>'',
+        'Starting_date'=>['required','date'],
+        'Ending_date'=>['required','date'],
+        'teacher_id'=>''
+
+    ]);
+    Course::create($formFields);
+    return redirect('/courses')->with('message','course added successfully!!!');
    }
 }

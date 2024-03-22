@@ -23,7 +23,7 @@
 
 
             {{-- form to register the user --}}
-            <form class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12" action="/student/store" method="POST">
+            <form class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 mb-0" action="/student/store" method="POST">
                 @csrf
 
 
@@ -100,7 +100,7 @@
                                 <div class="form-group">
                                     <label for="phone">Phone Number</label>
                                     <input type="number" class="form-control" id="phone_number" name="phone_number"
-                                        placeholder="Eg. 09_________" name="image" value="{{ old('phone_number') }}">
+                                        placeholder="Eg. 09_________" value="{{ old('phone_number') }}">
                                     @error('phone_number')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror

@@ -20,7 +20,7 @@ class CreateStudentsTable extends Migration
             $table->integer('age');
             $table->enum('gender', ['M', 'F']);
             $table->string('location');
-            $table->string('phone_number',10);
+            $table->string('phone_number');
             $table->string('email')->nullable();
             $table->enum('status',['Fresh','Junior','Senior']);
             $table->enum('preffered_time',['Morning','Afternoon']);
