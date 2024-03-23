@@ -11,29 +11,41 @@ class CourseController extends Controller
 {
     //
 
-    public function index(){
-        return view ("Courses.index",['courses'=>Course::latest()->get(),'title'=>'Course List']);
+    public function index()
+    {
+        return view("Courses.index", ['courses' => Course::latest()->get(), 'title' => 'Course List']);
     }
-    public function create(){
-        
-        return view("Courses.create",['teachers'=>Teacher::select('id', 'name')->get()]);
-   }
+    public function create()
+    {
 
-   public function store(Request $request){
-    $formFields=$request->validate([
-        'name'=>['required',Rule::unique('courses','name')],
-        'place'=>'required',
-        'time'=>'',
-        'Starting_date'=>['required','date'],
-        'Ending_date'=>['required','date'],
-        'teacher_id'=>''
+        return view("Courses.create", ['teachers' => Teacher::select('id', 'name')->get()]);
+    }
 
-    ]);
-    Course::create($formFields);
-    return redirect('/courses')->with('message','course added successfully!!!');
-   }
+    public function store(Request $request)
+    {
+        $formFields = $request->validate([
+            'name' => ['required', Rule::unique('courses', 'name')],
+            'place' => 'required',
+            'time' => '',
+            'Starting_date' => ['required', 'date'],
+            'Ending_date' => ['required', 'date'],
+            'teacher_id' => ''
 
-   public function show(Course $course){
-    return view("Courses.show",['columns'=>array_keys($course->getAttributes()),'course'=>$course]);
-}
+        ]);
+        Course::create($formFields);
+        return redirect('/courses')->with('message', 'course added successfully!!!');
+    }
+
+    public function show(Course $course)
+    {
+        return view("Courses.show", ['columns' => array_keys($course->getAttributes()), 'course' => $course]);
+    }
+
+    public function destroy(Course $course)
+    {
+        $course->delete();
+        $course->student()->delete();
+
+        return redirect('/courses')->with("message", "deleted successfully!!!");
+    }
 }

@@ -13,8 +13,7 @@ class StudentController extends Controller
 
      public function index()
      {
-
-          return view("Student.index", ["students" => Student::latest()->get(), "title" => "Student List"]);
+          return view("Student.index", ["students" => Student::latest()->SimplePaginate(10), "title" => "Student List"]);
      }
      public function create()
      {
@@ -43,5 +42,11 @@ class StudentController extends Controller
 
      public function show(Student $student){
          return view("Student.show",['columns'=>array_keys($student->getAttributes()),'student'=>$student]);
+     }
+
+     public function destroy(Student $student){
+          $student->delete();
+
+          return redirect('/students')->with("message","deleted successfully!!!");
      }
 }

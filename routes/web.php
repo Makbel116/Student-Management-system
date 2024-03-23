@@ -55,6 +55,13 @@ Route::post('/student/store',[StudentController::class,'store'])->middleware('au
 
 Route::get('/student/{student}/view',[StudentController::class,'show'])->middleware('auth');
 
+//to delete a certain student
+
+Route::delete('/student/{student}/delete',[StudentController::class,'destroy'])->middleware('auth'); 
+
+
+
+
 //courses
 
 //to get the list of courses
@@ -72,6 +79,12 @@ Route::post('/course/store',[CourseController::class,'store'])->middleware('auth
 
 Route::get('/course/{course}/view',[CourseController::class,'show'])->middleware('auth');
 
+//to delete a certain student
+
+Route::delete('/course/{course}/delete',[CourseController::class,'destroy'])->middleware('auth'); 
+
+
+
 //teachers
 
 //to get the list of teachers
@@ -88,3 +101,7 @@ Route::post('/teacher/store',[TeacherController::class,'store'])->middleware('au
 //to view each teacher detail
 
 Route::get('/teacher/{teacher}/view',[TeacherController::class,'show'])->middleware('auth');
+
+//to delete a certain student
+
+Route::delete('teacher/{teacher}/delete',[TeacherController::class,'destroy'])->middleware('auth'); 

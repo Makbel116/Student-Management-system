@@ -20,7 +20,7 @@ class CreateCoursesTable extends Migration
             $table->date('Ending_date');
             $table->string('place');
             $table->string('time');
-            $table->foreignId('teacher_id')->constrained();
+            $table->foreignId('teacher_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
+
 class TeacherController extends Controller
 {
     //
@@ -40,4 +41,23 @@ class TeacherController extends Controller
     public function show(Teacher $teacher){
         return view("Teachers.show",['columns'=>array_keys($teacher->getAttributes()),'teacher'=>$teacher]);
     }
+
+    public function destroy(Teacher $teacher){
+        $courses = $teacher->course;
+
+        // Loop through each course and access the students
+        foreach ($courses as $course) {
+            $students = $course->student;
+            foreach ($students as $student) {
+                $student->delete();
+            }
+            $course->delete();
+        }
+    
+        // Delete the teacher
+        $teacher->delete();
+
+
+        return redirect('/teachers')->with("message","deleted successfully!!!");
+   }
 }

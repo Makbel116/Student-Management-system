@@ -25,7 +25,7 @@ class CreateStudentsTable extends Migration
             $table->enum('status',['Fresh','Junior','Senior']);
             $table->enum('preffered_time',['Morning','Afternoon']);
             $table->string('recommendation')->nullable();
-            $table->foreignId('course_id')->constrained();
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
