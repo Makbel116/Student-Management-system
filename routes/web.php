@@ -38,6 +38,9 @@ Route::post("/user/authentcation",[UserController::class,'authentcation']);
 Route::post("/logout",[UserController::class,'logout']);
 
 
+
+
+
 //students
 
 //to get the list of students
@@ -58,6 +61,15 @@ Route::get('/student/{student}/view',[StudentController::class,'show'])->middlew
 //to delete a certain student
 
 Route::delete('/student/{student}/delete',[StudentController::class,'destroy'])->middleware('auth'); 
+
+//to show edit page a student details
+
+Route::get('/student/{student}/edit',[StudentController::class,'edit'])->middleware('auth');
+
+//to update the edited student details
+
+Route::put('/student/{student}/update',[StudentController::class,'update'])->middleware('auth');
+
 
 
 
@@ -83,6 +95,15 @@ Route::get('/course/{course}/view',[CourseController::class,'show'])->middleware
 
 Route::delete('/course/{course}/delete',[CourseController::class,'destroy'])->middleware('auth'); 
 
+//to show edit page a course details
+
+Route::get('/course/{course}/edit',[CourseController::class,'edit'])->middleware('auth');
+
+//to update the edited courses details
+
+Route::put('/course/{course}/update',[CourseController::class,'update'])->middleware('auth');
+
+
 
 
 //teachers
@@ -104,4 +125,12 @@ Route::get('/teacher/{teacher}/view',[TeacherController::class,'show'])->middlew
 
 //to delete a certain student
 
-Route::delete('teacher/{teacher}/delete',[TeacherController::class,'destroy'])->middleware('auth'); 
+Route::delete('teacher/{teacher}/delete',[TeacherController::class,'destroy'])->middleware('auth');
+
+//to show edit page a teacher details
+
+Route::get('/teacher/{teacher}/edit',[TeacherController::class,'edit'])->middleware('auth');
+
+//to update the edited teacher details
+
+Route::put('/teacher/{teacher}/update',[TeacherController::class,'update'])->middleware('auth');

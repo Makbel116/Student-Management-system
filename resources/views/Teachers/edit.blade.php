@@ -22,15 +22,15 @@
         </div>
 
 
-        {{-- form to register the teacher --}}
-        <form class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 mb-0" action="/teacher/store" method="POST">
+        {{-- form to update the teacher --}}
+        <form class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 mb-0" action="/teacher/{{$teacher->id}}/update" method="POST">
             @csrf
-
+            @method('PUT')
 
             {{-- Teacher Details --}}
             <div class="card h-100">
                 <div class="card-body">
-                    <h3>Register a Teacher</h3>
+                    <h3>Update a Teacher</h3>
                     <div class="row gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <h6 class="mb-2 text-primary">Teacher Details</h6>
@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label for="Name">Teacher Name</label>
                                 <input type="text" class="form-control" id="Name" name="name"
-                                    value="{{ old('name') }}" placeholder="Eg. John doe">
+                                    value="{{ $teacher->name }}" placeholder="Eg. John doe">
                             </div>
                             @error('name')
                                 <p class="text-danger">{{ $message }}</p>
@@ -55,7 +55,7 @@
                             <div class="form-group">
                                 <label for="age">Age</label>
                                 <input type="number" class="form-control" id="age" name="age"
-                                    value="{{ old('age') }}" placeholder="Eg. 24">
+                                    value="{{ $teacher->age }}" placeholder="Eg. 24">
                             </div>
                             @error('age')
                                 <p class="text-danger">{{ $message }}</p>
@@ -69,7 +69,7 @@
 
                                 <label for="gender">Gender</label>
                                 <select class="form-group form-select" name="gender" id="gender"
-                                    value="{{ old('gender') }}">
+                                    value="{{ $teacher->gender  }}">
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>
                                 </select>
@@ -86,7 +86,7 @@
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email"
-                                    value="{{ old('email') }}" placeholder="Eg. johndoe123@gmail.com">
+                                    value="{{ $teacher->email }}" placeholder="Eg. johndoe123@gmail.com">
                             </div>
                             @error('email')
                                 <p class="text-danger">{{ $message }}</p>
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
                                 <input type="number" class="form-control" id="phone_number" name="phone_number"
-                                    placeholder="Eg. 09_________" value="{{ old('phone_number') }}">
+                                    placeholder="Eg. 09_________" value="{{ $teacher->phone_number  }}">
                                 @error('phone_number')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -115,7 +115,7 @@
                             <div class="form-group">
                                 <label for="location">Location</label>
                                 <select class="form-group form-select" name="location" id="location"
-                                    value="{{ old('location') }}">
+                                    value="{{ $teacher->location }}">
                                     <option value="Addis Ketema">Addis Ketema</option>
                                     <option value="Akaky Kaliti">Akaky Kaliti</option>
                                     <option value="Arada">Arada</option>
@@ -140,7 +140,7 @@
                             <div class="form-group">
                                 <label for="status">Teacher status</label>
                                 <select class="form-group form-select" name="status" id="status"
-                                    value="{{ old('status') }}">
+                                    value="{{ $teacher->status  }}">
                                     <option value="Junior">Junior</option>
                                     <option value="Senior">Senior</option>
                                 </select>
@@ -156,7 +156,7 @@
                             <div class="form-group">
                                 <label for="Prefference">Preffered Time</label>
                                 <select class="form-group form-select" name="preffered_time" id="Prefference"
-                                    value="{{ old('preffered_time') }}">
+                                    value="{{ $teacher->preffered_time  }}">
                                     <option value="Morning">Morning</option>
                                     <option value="Afternoon">Afternoon</option>
                                 </select>
@@ -179,7 +179,7 @@
                             <div class="text-right">
 
                                 <button type="submit" id="submit" name="submit"
-                                    class="btn btn-primary">Register</button>
+                                    class="btn btn-primary">Update</button>
                             </div>
                         </div>
 

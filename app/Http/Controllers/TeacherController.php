@@ -13,7 +13,7 @@ class TeacherController extends Controller
     public function index()
     {
 
-        return view("Teachers.index", ["teachers" => Teacher::latest()->get(), "title" => "Teacher List"]);
+        return view("Teachers.index", ["teachers" => Teacher::latest()->get()]);
     }
     public function create()
     {
@@ -60,4 +60,24 @@ class TeacherController extends Controller
 
         return redirect('/teachers')->with("message","deleted successfully!!!");
    }
+
+   public function edit(Teacher $teacher){
+    return view('Teachers.edit',["teacher"=>$teacher]);
+}
+    public function update(Teacher $teacher,Request $request){
+        $formFields = $request->validate([
+            'name' => ['required'],
+            'age' => ['max:3'],
+            'email' => ['email'],
+            'phone_number' => ['required', 'min:10'],
+            'status' => '',
+            'gender' => '',
+            'location' => '',
+            'preffered_time' => '',
+
+        ]);
+
+        $teacher->update($formFields);
+        return redirect('/teacher/'.$teacher->id.'/view')->with('message','Updated successfully');
+    }
 }

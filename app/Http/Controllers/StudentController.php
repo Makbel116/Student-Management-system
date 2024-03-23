@@ -49,4 +49,27 @@ class StudentController extends Controller
 
           return redirect('/students')->with("message","deleted successfully!!!");
      }
+
+     public function edit(Student $student){
+          return view('Student.edit',["student"=>$student,"courses" => Course::select('id', 'name', 'place')->get()]);
+     }
+
+     public function update(Request $request,Student $student){
+          $formFields = $request->validate([
+               'name' => ['required'],
+               'age' => ['max:3'],
+               'email' => ['email'],
+               'phone_number' => ['required', 'min:10'],
+               'status'=>'',
+               'gender'=>'',
+               'location'=>'',
+               'preffered_time'=>'',
+               'recommendation'=>'',
+               'course_id'=>''
+          ]);
+          // dd($formFields);
+
+          $student->update($formFields);
+          return redirect('/student/'.$student->id.'/view')->with("message",'updated successfully!!!');
+     }
 }

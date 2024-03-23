@@ -35,6 +35,8 @@
             <form action="/{{ strtolower($title) . '/' . $choosen->id . '/delete' }}" method="POST" class="mx-4">
                 @csrf
                 @method('delete')
+                <a href="/{{strtolower($title)}}/{{ $choosen->id }}/edit" role="button" class="btn btn-warning mx-4"><i class="fa fa-pencil"></i>
+                    Edit</a>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalCenter">
                     <i class="fa fa-trash"></i> Delete
                   </button>
