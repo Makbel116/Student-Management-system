@@ -36,4 +36,8 @@ class TeacherController extends Controller
         Teacher::create($formFields);
         return redirect('/teachers')->with("message", 'Teacher Registered!!!');
     }
+
+    public function show(Teacher $teacher){
+        return view("Teachers.show",['columns'=>array_keys($teacher->getAttributes()),'teacher'=>$teacher]);
+    }
 }

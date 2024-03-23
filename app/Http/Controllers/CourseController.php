@@ -32,4 +32,8 @@ class CourseController extends Controller
     Course::create($formFields);
     return redirect('/courses')->with('message','course added successfully!!!');
    }
+
+   public function show(Course $course){
+    return view("Courses.show",['columns'=>array_keys($course->getAttributes()),'course'=>$course]);
+}
 }

@@ -40,4 +40,8 @@ class StudentController extends Controller
           Student::create($formFields);
           return redirect('/students')->with("message",'Student Registered!!!');
      }
+
+     public function show(Student $student){
+         return view("Student.show",['columns'=>array_keys($student->getAttributes()),'student'=>$student]);
+     }
 }

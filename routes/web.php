@@ -51,6 +51,10 @@ Route::get('/student/register',[StudentController::class,'create'])->middleware(
 
 Route::post('/student/store',[StudentController::class,'store'])->middleware('auth');
 
+//to view each student detail
+
+Route::get('/student/{student}/view',[StudentController::class,'show'])->middleware('auth');
+
 //courses
 
 //to get the list of courses
@@ -64,6 +68,10 @@ Route::get('/course/register',[CourseController::class,'create'])->middleware('a
 
 Route::post('/course/store',[CourseController::class,'store'])->middleware('auth');
 
+//to view each course detail
+
+Route::get('/course/{course}/view',[CourseController::class,'show'])->middleware('auth');
+
 //teachers
 
 //to get the list of teachers
@@ -76,3 +84,7 @@ Route::get('/teacher/register',[TeacherController::class,'create'])->middleware(
 //to store the teacher
 
 Route::post('/teacher/store',[TeacherController::class,'store'])->middleware('auth');
+
+//to view each teacher detail
+
+Route::get('/teacher/{teacher}/view',[TeacherController::class,'show'])->middleware('auth');
