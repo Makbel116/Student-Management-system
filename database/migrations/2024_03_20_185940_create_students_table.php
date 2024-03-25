@@ -14,18 +14,16 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            //images if needed
             $table->id();
             $table->string('name');
             $table->integer('age');
             $table->enum('gender', ['M', 'F']);
             $table->string('location');
             $table->string('phone_number');
-            $table->string('email')->nullable();
+            $table->string('email')->nullable()->unique();
             $table->enum('status',['Fresh','Junior','Senior']);
             $table->enum('preffered_time',['Morning','Afternoon']);
             $table->string('recommendation')->nullable();
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

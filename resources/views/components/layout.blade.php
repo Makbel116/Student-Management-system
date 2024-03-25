@@ -22,13 +22,18 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/courses">
-                                    Courses
+                                <a class="nav-link d-flex align-items-center gap-2" href="/batches">
+                                   Batches
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2" href="/teachers">
                                     Teachers
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/courses">
+                                    Courses
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -46,13 +51,18 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                              <a class="nav-link d-flex align-items-center gap-2" href="/teacher/register">
+                                  Register a teacher
+                              </a>
+                          </li>
+                            <li class="nav-item">
                               <a class="nav-link d-flex align-items-center gap-2" href="/course/register">
-                                  Register a course
+                                  Start a new course
                               </a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" href="/teacher/register">
-                                Register a teacher
+                            <a class="nav-link d-flex align-items-center gap-2" href="/batch/register">
+                                Start a new batch
                             </a>
                         </li>
                         </ul>

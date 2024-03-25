@@ -20,7 +20,8 @@ class Teacher extends Model
         'preffered_time',
     ];
 
-    public function course(){
-        return $this->hasMany(Course::class);
+    public function batch(){
+        return $this->hasMany(Batch::class);
     }
+
 }

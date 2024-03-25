@@ -4,6 +4,7 @@
         <h1 class="h2">Dashboard</h1>
 
     </div>
+    <x-table title="Batch" :collection="$batches"/>
     <x-table title="Student" :collection="$students" />
     <x-table title="Course" :collection="$courses" />
     <x-table title="Teacher" :collection="$teachers" />

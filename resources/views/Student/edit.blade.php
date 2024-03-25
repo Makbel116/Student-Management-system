@@ -1,4 +1,5 @@
 @include('partials._head')
+@include('partials._back')
 
     <div class="container my-4">
         <div class="row gutters">
@@ -188,21 +189,39 @@
 
 
 
-                            {{-- Course name --}}
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                                <div class="form-group">
-                                    <label for="Course">Course name</label>
-                                    <select class="form-group form-select" name="course_id" id="Course"
-                                        value="{{ $student->course }}">
-                                        @foreach ($courses as $course)
-                                            <option value="{{ $course->id }}">{{ $course->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @error('course_id')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
+                        {{--Remove From a batch --}}
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+                            <div class="form-group">
+                                <label for="batch">Remove From a batch</label>
+                                <select class="form-group form-select" name="assigned_batches" id="batch">
+                                    <option value=""></option>
+                                    @foreach ($assigned_batch as $batch)
+                                        <option value="{{ $batch->id }}">{{ $batch->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                            @error('assigned_batches')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        
+                        {{--Add to Other batch --}}
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+                            <div class="form-group">
+                                <label for="batch">Add to Other batch</label>
+                                <select class="form-group form-select" name="not_assigned_batches" id="batch">
+                                    <option value="" selected></option>
+                                    @foreach ($not_assigned_batches as $batch)
+                                        <option value="{{ $batch->id }}">{{ $batch->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('not_assigned_batches')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                                 <div class="form-group">
                                     <label for="Prefference">Preffered Time</label>

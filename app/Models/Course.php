@@ -10,19 +10,12 @@ class Course extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'teacher_id',
-        'place',
-        'time',
-        'Starting_date',
-        'Ending_date'
+        'description'
     ];
 
-    public function student(){
-        return $this->hasMany(Student::class);
+    public function batch(){
+        return $this->hasMany(Batch::class);
     }
 
-    public function teacher(){
-        return $this->belongsTo(Teacher::class);
-    }
 
 }

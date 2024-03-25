@@ -1,4 +1,6 @@
 @include('partials._head')
+@include('partials._back')
+
 
 <div class="container my-4">
     <div class="row gutters">
@@ -52,95 +54,22 @@
                         </div>
 
 
-                        {{-- Place  --}}
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                            <div class="form-group">
-                                <label for="place">Place</label>
-                                <input type="text" class="form-control" id="place" name="place"
-                                    value="{{ $course->place }}" placeholder="Eg. Megenagna Head Office">
-                            </div>
-                            @error('place')
+         
+
+                       {{-- Description--}}
+                       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" name="description"
+                                value="{{ $course->description }}">
+                            @error('description')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
+
                         </div>
-
-
-
-
-                        {{-- Start date --}}
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                            <div class="form-group">
-                                <label for="s_date">Starts Date</label>
-                                <input type="date" class="form-control" id="s_date" name="Starting_date"
-                                    value="{{ $course->Starting_date }}">
-                            </div>
-                            @error('Starting_date')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-
-
-                        {{-- Ending date --}}
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                            <div class="form-group">
-                                <label for="E_date">Ending date</label>
-                                <input type="date" class="form-control" id="E_date" name="Ending_date"
-                                    value="{{ $course->Ending_date }}">
-                                @error('Ending_date')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-
-                            </div>
-                        </div>
-
-                         {{-- preffered time --}}
-                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
-                            <p class="text-primary">The preffered time for the teacher is {{$course->teacher->preffered_time}}</p>
-                            <p class="text-primary">The most preffered time for the students is {{$most_preffered}}</p>
-                        </div>
-
-                        {{-- Time  --}}
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                            <div class="form-group">
-
-                                <label for="time">Time</label>
-                                <select class="form-group form-select" name="time" id="time"
-                                    value="{{ $course->time }}">
-                                    <option value="Morning 3:00-4:30">Morning 3:00-4:30</option>
-                                    <option value="Afternoon 8:00-9:30">Afternoon 8:00-9:30</option>
-                                </select>
-                            </div>
-                            @error('time')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
-                            <h6 class="mt-3 mb-2 text-primary">Teacher Details</h6>
-                        </div>
 
 
-
-                        {{-- teacher name --}}
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                            <div class="form-group">
-                                <label for="Teacher">Choose your teacher</label>
-                                <select class="form-group form-select" name="teacher_id" id="Teacher"
-                                    value="{{ $course->teacher->name }}">
-                                    @foreach ($teachers as $teacher)
-                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @error('teacher_id')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
 
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-4">

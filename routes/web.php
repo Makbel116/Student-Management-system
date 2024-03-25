@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BatchController;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
@@ -134,3 +135,35 @@ Route::get('/teacher/{teacher}/edit',[TeacherController::class,'edit'])->middlew
 //to update the edited teacher details
 
 Route::put('/teacher/{teacher}/update',[TeacherController::class,'update'])->middleware('auth');
+
+
+
+//Batches
+
+// to get the list of the batches
+Route::get('/batches',[BatchController::class,'index']);
+
+
+//to show a batches register page
+
+Route::get('/batch/register',[BatchController::class,'create'])->middleware('auth');
+
+//to store the batch
+
+Route::post('/batch/store',[BatchController::class,'store'])->middleware('auth');
+
+//to view each batch detail
+
+Route::get('/batch/{batch}/view',[BatchController::class,'show'])->middleware('auth');
+
+//to show edit page a batch details
+
+Route::get('/batch/{batch}/edit',[BatchController::class,'edit'])->middleware('auth');
+
+//to update the edited batch details
+
+Route::put('/batch/{batch}/update',[BatchController::class,'update'])->middleware('auth');
+
+//to delete a certain batch
+
+Route::delete('batch/{batch}/delete',[BatchController::class,'destroy'])->middleware('auth');

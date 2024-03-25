@@ -19,10 +19,11 @@ class Student extends Model
         'phone_number',
         'preffered_time',
         'recommendation',
-        'course_id'
+        'batch_id'
     ];
-    public function course(){
-        return $this->belongsTo(Course::class);
+    public function batches(){
+        return $this->belongsToMany(Batch::class);
     }
+
     
 }

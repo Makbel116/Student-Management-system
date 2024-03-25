@@ -1,4 +1,5 @@
 @include('partials._head')
+@include('partials._back')
 
     <div class="container my-4">
         <div class="row gutters">
@@ -188,18 +189,18 @@
 
 
 
-                            {{-- Course name --}}
+                            {{--Assign batch --}}
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                                 <div class="form-group">
-                                    <label for="Course">Course name</label>
-                                    <select class="form-group form-select" name="course_id" id="Course"
-                                        value="{{ old('course_id') }}">
-                                        @foreach ($courses as $course)
-                                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                    <label for="batch">Assign batch</label>
+                                    <select class="form-group form-select" name="batch_id" id="batch"
+                                        value="{{ old('batch_id') }}">
+                                        @foreach ($batches as $batch)
+                                            <option value="{{ $batch->id }}">{{ $batch->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                @error('course_id')
+                                @error('batch_id')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>

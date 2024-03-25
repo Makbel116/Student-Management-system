@@ -16,10 +16,7 @@ class CourseFactory extends Factory
         return [
             //
             'name'=>$this->faker->unique()->randomElement(['Laravel','Backend','Flutter','React']),
-            'Starting_date'=>$this->faker->date(),
-            'Ending_date'=>$this->faker->date(),
-            'place'=>$this->faker->randomElement(["Megenagna",'Piyasa']),
-            'time'=>$this->faker->randomElement(['Morning 3:00-4:30','Afternoon 8:00-9:30'])
+            'description'=>$this->faker->sentence(6)
         ];
     }
 }
