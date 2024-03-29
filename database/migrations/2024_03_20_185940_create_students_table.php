@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->integer('age');
             $table->enum('gender', ['M', 'F']);
-            $table->string('location');
+            $table->foreignId('location_id');
             $table->string('phone_number');
             $table->string('email')->nullable()->unique();
             $table->enum('status',['Fresh','Junior','Senior']);

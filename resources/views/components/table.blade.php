@@ -58,7 +58,7 @@
                         <td>{{ $eachRow->age }}</td>
                         <td>{{ $eachRow->gender }}</td>
                         <td>{{ $eachRow->email }}</td>
-                        <td>{{ $eachRow->location }}</td>
+                        <td>{{ $eachRow->location->name }}</td>
                         <td>{{ $eachRow->status }}</td>
                         <td>{{ $eachRow->phone_number }}</td>
 

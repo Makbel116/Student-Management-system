@@ -15,7 +15,7 @@ class Student extends Model
         'age',
         'gender',
         'status',
-        'location',
+        'location_id',
         'phone_number',
         'preffered_time',
         'recommendation',
@@ -25,5 +25,8 @@ class Student extends Model
         return $this->belongsToMany(Batch::class);
     }
 
+    public function location(){
+        return $this->belongsTo(Location::class);
+    }
     
 }

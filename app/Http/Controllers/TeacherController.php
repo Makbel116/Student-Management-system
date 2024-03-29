@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -13,12 +14,21 @@ class TeacherController extends Controller
     public function index()
     {
 
-        return view("Teachers.index", ["teachers" => Teacher::latest()->get()]);
+        return view(
+            "Teachers.index",
+            [
+                "teachers" => Teacher::latest()->get(),
+                "locations" =>  Location::all()
+            ]
+        );
     }
     public function create()
     {
 
-        return view("Teachers.create",);
+        return view(
+            "Teachers.create",
+            ["locations" =>  Location::all()]
+        );
     }
     public function store(Request $request)
     {
@@ -29,33 +39,47 @@ class TeacherController extends Controller
             'phone_number' => ['required', 'min:10'],
             'status' => '',
             'gender' => '',
-            'location' => '',
+            'location_id' => '',
             'preffered_time' => '',
         ]);
-        
+
 
         Teacher::create($formFields);
         return redirect('/teachers')->with("message", 'Teacher Registered Successfully!!!');
     }
 
-    public function show(Teacher $teacher){
-        $batches=$teacher->batch()->get();
-        return view("Teachers.show",['columns'=>array_keys($teacher->getAttributes()),'teacher'=>$teacher,"batches"=>$batches]);
+    public function show(Teacher $teacher)
+    {
+        $batches = $teacher->batch()->get();
+        return view(
+            "Teachers.show",
+            [
+                'columns' => array_keys($teacher->getAttributes()),
+                'teacher' => $teacher,
+                "batches" => $batches
+            ]
+        );
     }
 
-    public function destroy(Teacher $teacher){
-        
+    public function destroy(Teacher $teacher)
+    {
+
         // Delete the teacher
         $teacher->delete();
 
 
-        return redirect('/teachers')->with("message","teacher deleted successfully!!!");
-   }
+        return redirect('/teachers')->with("message", "teacher deleted successfully!!!");
+    }
 
-   public function edit(Teacher $teacher){
-    return view('Teachers.edit',["teacher"=>$teacher]);
-}
-    public function update(Teacher $teacher,Request $request){
+    public function edit(Teacher $teacher)
+    {
+        return view('Teachers.edit', [
+            "teacher" => $teacher,
+            "locations" => Location::all()
+        ]);
+    }
+    public function update(Teacher $teacher, Request $request)
+    {
         $formFields = $request->validate([
             'name' => ['required'],
             'age' => ['max:3'],
@@ -63,12 +87,12 @@ class TeacherController extends Controller
             'phone_number' => ['required', 'min:10'],
             'status' => '',
             'gender' => '',
-            'location' => '',
+            'location_id' => '',
             'preffered_time' => '',
 
         ]);
 
         $teacher->update($formFields);
-        return redirect('/teacher/'.$teacher->id.'/view')->with('message','teacher updated successfully');
+        return redirect('/teacher/' . $teacher->id . '/view')->with('message', 'teacher updated successfully');
     }
 }

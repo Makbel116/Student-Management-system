@@ -18,7 +18,6 @@ class TeacherFactory extends Factory
             'name' =>$this->faker->name,
             'age'=>$this->faker->numberBetween(15,45),
             'gender'=>$this->faker->randomElement(['M','F']),
-            'location' =>$this->faker->randomElement(['Addis Ketema','Akaky Kaliti','Arada','Bole','Gullele','Kirkos','Kolfe Keraniyo','Lemi Kura','Lideta','Nifas Silk-Lafto','Yeka']),
             'phone_number'=>'0943031703',
             'email'=>$this->faker->email,
             'status'=>$this->faker->randomElement(['Junior','Senior']),

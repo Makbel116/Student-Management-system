@@ -1,4 +1,4 @@
-@props(['title', 'columns', 'choosen', 'batches', 'students', 'teachers', 'courses','schedules'])
+@props(['title', 'columns', 'choosen', 'batches', 'students', 'teachers', 'courses', 'schedules'])
 @include('partials._back')
 
 
@@ -106,19 +106,22 @@
 
                                 <h4 class="mt-4">Related schedule</h4>
                                 <div class="table-responsive">
-    
+
                                     <table class="table table-striped ">
                                         <tbody>
                                             @foreach ($schedules as $schedule)
                                                 <tr>
                                                     <td>
-                                                        
+
                                                         {{ $schedule->name }}
                                                     </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                        </div>
 
                     @endif
                 </div>

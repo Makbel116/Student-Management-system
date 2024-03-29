@@ -179,13 +179,26 @@ Route::delete('batch/{batch}/delete',[BatchController::class,'destroy'])->middle
 // to view the settings page
 Route::get('/settings',[SettingController::class,'index'])->middleware('auth');
 
+//to show the edit page for schedule
+Route::get('/schedule/edit',[SettingController::class,'schedule_edit'])->middleware('auth');
 
 //to add a new schedule
-Route::post('/schedule/store',[SettingController::class,'store'])->middleware('auth');
+Route::post('/schedule/store',[SettingController::class,'schedule_store'])->middleware('auth');
 
 //to delete a schedule
 
-Route::delete('/schedule/{schedule}/delete',[SettingController::class,'destroy'])->middleware('auth');
+Route::delete('/schedule/{schedule}/delete',[SettingController::class,'schedule_destroy'])->middleware('auth');
+
+
+//to show the edit page for location
+Route::get('/location/edit',[SettingController::class,'location_edit'])->middleware('auth');
+
+//to add a new location
+Route::post('/location/store',[SettingController::class,'location_store'])->middleware('auth');
+
+//to delete a location
+
+Route::delete('/location/{location}/delete',[SettingController::class,'location_destroy'])->middleware('auth');
 
 
 

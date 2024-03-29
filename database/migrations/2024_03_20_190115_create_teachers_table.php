@@ -18,7 +18,7 @@ class CreateTeachersTable extends Migration
             $table->string('name');
             $table->integer('age');
             $table->enum('gender', ['M', 'F']);
-            $table->string('location');
+            $table->foreignId('location_id');
             $table->string('phone_number');
             $table->string('email')->unique();
             $table->enum('preffered_time',['Morning','Afternoon']);

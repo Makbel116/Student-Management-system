@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Batch;
 use App\Models\Course;
+use App\Models\Location;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -25,7 +26,13 @@ class StudentController extends Controller
      public function create()
      {
 
-          return view("Student.create", ["batches" => Batch::select('id', 'name')->get()]);
+          return view(
+               "Student.create",
+               [
+                    "batches" => Batch::select('id', 'name')->get(),
+                    "locations" => Location::all()
+               ]
+          );
      }
      public function store(Request $request)
      {
@@ -36,7 +43,7 @@ class StudentController extends Controller
                'phone_number' => ['required', 'min:10'],
                'status' => '',
                'gender' => '',
-               'location' => '',
+               'location_id' => '',
                'preffered_time' => '',
                'recommendation' => '',
           ]);
@@ -103,7 +110,8 @@ class StudentController extends Controller
                     "student" => $student,
                     "batches" => Batch::select('id', 'name')->get(),
                     "assigned_batch" => $assigned_batches,
-                    "not_assigned_batches" => $not_assigned_batches
+                    "not_assigned_batches" => $not_assigned_batches,
+                    "locations" => Location::all()
                ]
           );
      }
@@ -117,7 +125,7 @@ class StudentController extends Controller
                'phone_number' => ['required', 'min:10'],
                'status' => '',
                'gender' => '',
-               'location' => '',
+               'location_id' => '',
                'preffered_time' => '',
                'recommendation' => '',
                'assigned_batches' => '',

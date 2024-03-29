@@ -15,7 +15,7 @@ class Teacher extends Model
         'age',
         'gender',
         'status',
-        'location',
+        'location_id',
         'phone_number',
         'preffered_time',
     ];
@@ -23,5 +23,7 @@ class Teacher extends Model
     public function batch(){
         return $this->hasMany(Batch::class);
     }
-
+    public function location(){
+        return $this->belongsTo(Location::class);
+    }
 }
