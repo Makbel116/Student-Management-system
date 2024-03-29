@@ -55,10 +55,13 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                             <div class="form-group">
                                 <label for="place">Place</label>
-                                <input type="text" class="form-control" id="place" name="place"
-                                    value="{{ old('place') }}" placeholder="Eg. Megenagna Head Office">
+                                <select class="form-group form-select" name="place_id" id="place">
+                                    @foreach ($places as $place)
+                                    <option value="{{ $place->id }}">{{ $place->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            @error('place')
+                            @error('place_id')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
@@ -69,14 +72,13 @@
                             <div class="form-group">
 
                                 <label for="time">Schedule</label>
-                                <select class="form-group form-select" name="time" id="time"
-                                    value="{{ old('time') }}">
+                                <select class="form-group form-select" name="schedule_id" id="time">
                                     @foreach ($schedules as $schedule)
                                     <option value="{{ $schedule->id }}">{{ $schedule->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            @error('time')
+                            @error('schedule_id')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
@@ -125,8 +127,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                             <div class="form-group">
                                 <label for="Teacher">Choose your course</label>
-                                <select class="form-group form-select" name="course_id" id="Teacher"
-                                    value="{{ old('course_id') }}">
+                                <select class="form-group form-select" name="course_id" id="Teacher">
                                     @foreach ($courses as $course)
                                         <option value="{{ $course->id }}">{{ $course->name }}</option>
                                     @endforeach
@@ -149,8 +150,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                                     <div class="form-group">
                                         <label for="Teacher">Choose your teacher</label>
-                                        <select class="form-group form-select" name="teacher_id" id="Teacher"
-                                            value="{{ old('teacher_id') }}">
+                                        <select class="form-group form-select" name="teacher_id" id="Teacher">
                                             @foreach ($teachers as $teacher)
                                                 <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                                             @endforeach

@@ -3,11 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Batch;
+use App\Models\Place;
 use App\Models\Course;
-use App\Models\Location;
-use App\Models\Schedule;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Location;
+use App\Models\Schedule;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,12 +23,13 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(1)->create();
 
         $locations = Location::factory(11)->create();
+        $places= Place::factory(3)->create();
 
         //creates 2 teachers 
         for ($i = 0; $i < 2; $i++) {
             Teacher::factory()->create([
-                'location_id' => $locations[$i]->id
-
+                'location_id' => $locations[$i]->id,
+            
             ]);
         }
 
@@ -51,8 +53,8 @@ class DatabaseSeeder extends Seeder
                     // creates relationship between course & teachers with batch
                     'course_id' => $courses[$i]->id,
                     'teacher_id' => $teacher->id,
-                    'schedule_id' => $schedules[$i]->id
-
+                    'schedule_id' => $schedules[$i]->id,
+                    'place_id' => $places[$i]->id
                 ]);
             }
         }

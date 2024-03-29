@@ -25,7 +25,7 @@
 
 
         {{-- form to register the  batch --}}
-        <form class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 mb-0" action="/batch/update" method="POST">
+        <form class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 mb-0" action="/batch/{{$batch->id}}/update" method="POST">
             @csrf
             @method('PUT')
 
@@ -97,8 +97,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                             <div class="form-group">
                                 <label for="Teacher">Choose your course</label>
-                                <select class="form-group form-select" name="course_id" id="Teacher"
-                                    value="{{ $batch->course->name }}">
+                                <select class="form-group form-select" name="course_id" id="Teacher">
                                     @foreach ($courses as $course)
                                         <option value="{{ $course->id }}">{{ $course->name }}</option>
                                     @endforeach
@@ -121,8 +120,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                                     <div class="form-group">
                                         <label for="Teacher">Choose your teacher</label>
-                                        <select class="form-group form-select" name="teacher_id" id="Teacher"
-                                            value="{{ $batch->teacher->name }}">
+                                        <select class="form-group form-select" name="teacher_id" id="Teacher">
                                             @foreach ($teachers as $teacher)
                                                 <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                                             @endforeach
@@ -152,12 +150,15 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                                     <div class="form-group">
                                         <label for="place">Place</label>
-                                        <input type="text" class="form-control" id="place" name="place"
-                                            value="{{ $batch->place }}" placeholder="Eg. Megenagna Head Office">
-                                    </div>
-                                    @error('place')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
+                                        <select class="form-group form-select" name="place_id" id="place">
+                                        @foreach ($places as $place)
+                                        <option value="{{ $place->id }}">{{ $place->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('place_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                 </div>
 
 
@@ -167,14 +168,13 @@
                                     <div class="form-group">
 
                                         <label for="time">Schedule</label>
-                                        <select class="form-group form-select" name="time" id="time"
-                                            value="{{ $batch->schedule->time }}">
+                                        <select class="form-group form-select" name="schedule_id" id="time">
                                             @foreach ($schedules as $schedule)
                                                 <option value="{{ $schedule->id }}">{{ $schedule->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('time')
+                                    @error('schedule_id')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

@@ -187,6 +187,7 @@
                                 <label for="batch">Assign batch</label>
                                 <select class="form-group form-select" name="batch_id" id="batch"
                                     value="{{ old('batch_id') }}">
+                                    <option value=""></option>
                                     @foreach ($batches as $batch)
                                         <option value="{{ $batch->id }}">{{ $batch->name }}</option>
                                     @endforeach

@@ -11,8 +11,8 @@ class Batch extends Model
 
     protected $fillable = [
         'name',
-        'place',
-        'time',
+        'place_id',
+        'schedule_id',
         'start_date',
         'end_date',
         'teacher_id',
@@ -31,5 +31,9 @@ class Batch extends Model
 
     public function schedule(){
         return $this->belongsTo(Schedule::class);
+    }
+
+    public function place(){
+        return $this->belongsTo(Place::class);
     }
 }

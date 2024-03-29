@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Batch;
+use App\Models\Place;
 use App\Models\Course;
-use App\Models\Schedule;
 use App\Models\Teacher;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -23,14 +24,16 @@ class BatchController extends Controller
         return view('Batches.create', [
             "teachers" => Teacher::all(),
             "courses" => Course::all(),
-            "schedules" => Schedule::all()
+            "schedules" => Schedule::all(),
+            "places" => Place::all()
         ]);
     }
     public function store(Request $request)
     {
+        // dd($request);
         $formFields = $request->validate([
-            'name' => ['required', Rule::unique('courses', 'name')],
-            'place' => 'required',
+            'name' => ['required', Rule::unique('batches', 'name')],
+            'place_id' => '',
             'schedule_id' => '',
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
@@ -39,7 +42,7 @@ class BatchController extends Controller
 
         ]);
 
-
+        // dd($formFields);
         Batch::create($formFields);
         return redirect('/batches')->with('message', 'batch created successfully!!!');
     }
@@ -55,7 +58,8 @@ class BatchController extends Controller
                 "teachers" => $batch->teacher()->get(),
                 "students" => $batch->students()->get(),
                 "courses" => $batch->course()->get(),
-                "schedules"=>$batch->schedule()->get()
+                "schedules" => $batch->schedule()->get(),
+
             ]
         );
     }
@@ -91,7 +95,8 @@ class BatchController extends Controller
                 "teachers" => Teacher::all(),
                 "courses" => Course::all(),
                 'most_preffered' => $most_preffered,
-                "schedules" => Schedule::all()
+                "schedules" => Schedule::all(),
+                "places" => Place::all()
             ]
         );
     }
@@ -101,7 +106,7 @@ class BatchController extends Controller
     {
         $formFields = $request->validate([
             'name' => ['required'],
-            'place' => 'required',
+            'place_id' => '',
             'schedule_id' => '',
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
@@ -109,7 +114,7 @@ class BatchController extends Controller
             'course_id' => ''
 
         ]);
-
+        // dd($formFields);
         $batch->update($formFields);
 
         return redirect('/batch/' . $batch->id . '/view')->with('batch updated successfully!!!');

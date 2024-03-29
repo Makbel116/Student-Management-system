@@ -22,7 +22,7 @@
 
                     {{-- students only --}}
                     @if ($title == 'Student')
-                        <th scope="col">Belonged Batch</th> 
+                        <th scope="col">Belonged Batch</th>
 
                         {{-- teachers only --}}
                         {{-- @else
@@ -37,7 +37,7 @@
                     <th scope="col">Start date</th>
                     <th scope="col">End Date</th>
 
-                    
+
                     {{-- courses only --}}
                 @else
                     <th scope="col">Description</th>
@@ -58,14 +58,17 @@
                         <td>{{ $eachRow->age }}</td>
                         <td>{{ $eachRow->gender }}</td>
                         <td>{{ $eachRow->email }}</td>
-                        <td>{{ $eachRow->location->name }}</td>
+                        @if ($eachRow->location)
+                            <td>{{ $eachRow->location->name }}</td>
+                        @else
+                            <td><strong class="text-danger">null</strong></td>
+                        @endif
                         <td>{{ $eachRow->status }}</td>
                         <td>{{ $eachRow->phone_number }}</td>
 
 
-                       {{-- students only --}}
+                        {{-- students only --}}
                         @if ($title == 'Student')
-                           
                             <td>{{ implode(', ', array_column($eachRow->batches->toArray(), 'name')) }}</td>
 
 
@@ -77,12 +80,20 @@
 
                         {{-- batches only --}}
                     @elseif($title == 'Batch')
-                        <td>{{ $eachRow->place }}</td>
-                        <td>{{ $eachRow->schedule->name }}</td>
+                        @if ($eachRow->place)
+                            <td>{{ $eachRow->place->name }}</td>
+                        @else
+                            <td><strong class="text-danger">null</strong></td>
+                        @endif
+                        @if ($eachRow->schedule)
+                            <td>{{ $eachRow->schedule->name }}</td>
+                        @else
+                            <td><strong class="text-danger">null</strong></td>
+                        @endif
                         <td>{{ $eachRow->start_date }}</td>
                         <td>{{ $eachRow->end_date }}</td>
 
-                        
+
                         {{-- courses only --}}
                     @else
                         <td>{{ $eachRow->description }}</td>

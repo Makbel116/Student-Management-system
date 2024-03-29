@@ -13,6 +13,8 @@ class CreateLocationsTable extends Migration
      */
     public function up()
     {
+
+        //to store subcities where students and teachers live
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');

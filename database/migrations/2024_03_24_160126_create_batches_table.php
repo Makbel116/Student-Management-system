@@ -20,7 +20,7 @@ class CreateBatchesTable extends Migration
             $table->foreignId('teacher_id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('place');
+            $table->foreignId('place_id');
             $table->foreignId('schedule_id');
             $table->timestamps();
 

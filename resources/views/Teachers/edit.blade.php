@@ -115,8 +115,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                             <div class="form-group">
                                 <label for="location">Location</label>
-                                <select class="form-group form-select" name="location_id" id="location"
-                                   value="{{ $teacher->location->name }}" >
+                                <select class="form-group form-select" name="location_id" id="location" >
                                     @foreach ($locations as $location)
                                         
                                     <option value={{$location->id}}>{{$location->name}}</option>
@@ -133,8 +132,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                             <div class="form-group">
                                 <label for="status">Teacher status</label>
-                                <select class="form-group form-select" name="status" id="status"
-                                    value="{{ $teacher->status  }}">
+                                <select class="form-group form-select" name="status" id="status">
                                     <option value="Junior">Junior</option>
                                     <option value="Senior">Senior</option>
                                 </select>
@@ -149,8 +147,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                             <div class="form-group">
                                 <label for="Prefference">Preffered Time</label>
-                                <select class="form-group form-select" name="preffered_time" id="Prefference"
-                                    value="{{ $teacher->preffered_time  }}">
+                                <select class="form-group form-select" name="preffered_time" id="Prefference">
                                     <option value="Morning">Morning</option>
                                     <option value="Afternoon">Afternoon</option>
                                 </select>

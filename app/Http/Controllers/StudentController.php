@@ -51,7 +51,9 @@ class StudentController extends Controller
           $student = Student::create($formFields);
 
           //assigns batches with students
-          $student->batches()->attach(Batch::find($request->batch_id));
+          if ($request->batch_id) {
+               $student->batches()->attach(Batch::find($request->batch_id));
+          }
 
           return redirect('/students')->with("message", 'Student registered successfully!!!');
      }

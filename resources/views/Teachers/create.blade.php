@@ -69,8 +69,7 @@
                             <div class="form-group">
 
                                 <label for="gender">Gender</label>
-                                <select class="form-group form-select" name="gender" id="gender"
-                                    value="{{ old('gender') }}">
+                                <select class="form-group form-select" name="gender" id="gender">
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>
                                 </select>
@@ -87,7 +86,7 @@
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email"
-                                    value="{{ old('email') }}" placeholder="Eg. johndoe123@gmail.com">
+                                     placeholder="Eg. johndoe123@gmail.com">
                             </div>
                             @error('email')
                                 <p class="text-danger">{{ $message }}</p>
@@ -115,8 +114,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                             <div class="form-group">
                                 <label for="location">Location</label>
-                                <select class="form-group form-select" name="location_id" id="location"
-                                    value="{{ old('location_id') }}">
+                                <select class="form-group form-select" name="location_id" id="location">
                                     @foreach ($locations as $location)
                                         
                                     <option value={{$location->id}}>{{$location->name}}</option>
@@ -133,8 +131,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                             <div class="form-group">
                                 <label for="status">Teacher status</label>
-                                <select class="form-group form-select" name="status" id="status"
-                                    value="{{ old('status') }}">
+                                <select class="form-group form-select" name="status" id="status">
                                     <option value="Junior">Junior</option>
                                     <option value="Senior">Senior</option>
                                 </select>
@@ -149,8 +146,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                             <div class="form-group">
                                 <label for="Prefference">Preffered Time</label>
-                                <select class="form-group form-select" name="preffered_time" id="Prefference"
-                                    value="{{ old('preffered_time') }}">
+                                <select class="form-group form-select" name="preffered_time" id="Prefference">
                                     <option value="Morning">Morning</option>
                                     <option value="Afternoon">Afternoon</option>
                                 </select>

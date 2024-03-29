@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class BatchFactory extends Factory
+class PlaceFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,10 +15,8 @@ class BatchFactory extends Factory
     {
         return [
             //
-            'name'=>'Batch '.$this->faker->numberBetween(0,99),
-            'start_date'=>$this->faker->date(),
-            'end_date'=>$this->faker->date(),
-            
+            'name'=>$this->faker->unique()->randomElement(["Megenagna",'Piyasa','Koye Feche']),
+
         ];
     }
 }
