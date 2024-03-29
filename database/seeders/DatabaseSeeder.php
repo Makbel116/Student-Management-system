@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Batch;
 use App\Models\Course;
+use App\Models\Schedule;
 use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Database\Seeder;
@@ -32,15 +33,20 @@ class DatabaseSeeder extends Seeder
         //holds the 4 courses created
         $courses = Course::all();
 
+        $schedules = Schedule::factory(3)->create();
         //creates 8 batches
         //each courses are assiged with 2 batches assuming each teachers teached 4 batches
-        foreach ($courses as $course) {
-            foreach($teachers as $teacher){
-            Batch::factory()->create([
-                // creates relationship between course & teachers with batch
-                'course_id' => $course->id,
-                'teacher_id' => $teacher->id,
-            ]);}
+        for($i=0; $i < 3; $i++) {
+            foreach ($teachers as $teacher) {
+
+                Batch::factory()->create([
+                    // creates relationship between course & teachers with batch
+                    'course_id' => $courses[$i]->id,
+                    'teacher_id' => $teacher->id,
+                    'schedule_id' => $schedules[$i]->id
+
+                ]);
+            }
         }
 
 

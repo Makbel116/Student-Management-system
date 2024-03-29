@@ -166,11 +166,12 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                                     <div class="form-group">
 
-                                        <label for="time">Time</label>
+                                        <label for="time">Schedule</label>
                                         <select class="form-group form-select" name="time" id="time"
-                                            value="{{ $batch->time }}">
-                                            <option value="Morning 3:00-4:30">Morning 3:00-4:30</option>
-                                            <option value="Afternoon 8:00-9:30">Afternoon 8:00-9:30</option>
+                                            value="{{ $batch->schedule->time }}">
+                                            @foreach ($schedules as $schedule)
+                                                <option value="{{ $schedule->id }}">{{ $schedule->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     @error('time')

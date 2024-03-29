@@ -19,7 +19,7 @@ class BatchFactory extends Factory
             'start_date'=>$this->faker->date(),
             'end_date'=>$this->faker->date(),
             'place'=>$this->faker->randomElement(["Megenagna",'Piyasa']),
-            'time'=>$this->faker->randomElement(['Morning 3:00-4:30','Afternoon 8:00-9:30'])
+            
         ];
     }
 }

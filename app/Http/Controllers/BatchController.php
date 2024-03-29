@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Batch;
 use App\Models\Course;
+use App\Models\Schedule;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -19,14 +20,18 @@ class BatchController extends Controller
 
     public function create()
     {
-        return view('Batches.create', ["teachers" => Teacher::all(), "courses" => Course::all()]);
+        return view('Batches.create', [
+            "teachers" => Teacher::all(),
+            "courses" => Course::all(),
+            "schedules" => Schedule::all()
+        ]);
     }
     public function store(Request $request)
     {
         $formFields = $request->validate([
             'name' => ['required', Rule::unique('courses', 'name')],
             'place' => 'required',
-            'time' => '',
+            'schedule_id' => '',
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             'teacher_id' => '',
@@ -50,6 +55,7 @@ class BatchController extends Controller
                 "teachers" => $batch->teacher()->get(),
                 "students" => $batch->students()->get(),
                 "courses" => $batch->course()->get(),
+                "schedules"=>$batch->schedule()->get()
             ]
         );
     }
@@ -58,24 +64,24 @@ class BatchController extends Controller
     public function edit(Batch $batch)
     {
 
-        $students=$batch->students()->get();
-             $most_preffered='';
-             $mor=$aftr=0;
-             foreach ($students as $student) {
-                 if($student->preffered_time=='Morning'){
-                     $mor+=1;
-                 }
-                 if($student->preffered_time=='Afternoon'){
-                     $aftr+=1;
-                 }
-             }
-             if($aftr>$mor){
-                 $most_preffered='Afternoon with '.floor($aftr/count($students)*100).'%';
-             }elseif($aftr<$mor){
-                 $most_preffered='Morning with '.floor($mor/count($students)*100).'%';
-             }else{
-                 $most_preffered='Equally Morning & Afternoon';
-             }
+        $students = $batch->students()->get();
+        $most_preffered = '';
+        $mor = $aftr = 0;
+        foreach ($students as $student) {
+            if ($student->preffered_time == 'Morning') {
+                $mor += 1;
+            }
+            if ($student->preffered_time == 'Afternoon') {
+                $aftr += 1;
+            }
+        }
+        if ($aftr > $mor) {
+            $most_preffered = 'Afternoon with ' . floor($aftr / count($students) * 100) . '%';
+        } elseif ($aftr < $mor) {
+            $most_preffered = 'Morning with ' . floor($mor / count($students) * 100) . '%';
+        } else {
+            $most_preffered = 'Equally Morning & Afternoon';
+        }
 
 
         return view(
@@ -84,17 +90,19 @@ class BatchController extends Controller
                 "batch" => $batch,
                 "teachers" => Teacher::all(),
                 "courses" => Course::all(),
-                'most_preffered'=>$most_preffered
+                'most_preffered' => $most_preffered,
+                "schedules" => Schedule::all()
             ]
         );
     }
 
 
-    public function update(Batch $batch,Request $request){
+    public function update(Batch $batch, Request $request)
+    {
         $formFields = $request->validate([
             'name' => ['required'],
             'place' => 'required',
-            'time' => '',
+            'schedule_id' => '',
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             'teacher_id' => '',
@@ -109,9 +117,8 @@ class BatchController extends Controller
 
     public function destroy(Batch $batch)
     {
-         $batch->delete();
+        $batch->delete();
 
-         return redirect('/students')->with("message", "batch deleted successfully!!!");
+        return redirect('/students')->with("message", "batch deleted successfully!!!");
     }
-
 }

@@ -78,7 +78,7 @@
                         {{-- batches only --}}
                     @elseif($title == 'Batch')
                         <td>{{ $eachRow->place }}</td>
-                        <td>{{ $eachRow->time }}</td>
+                        <td>{{ $eachRow->schedule->name }}</td>
                         <td>{{ $eachRow->start_date }}</td>
                         <td>{{ $eachRow->end_date }}</td>
 

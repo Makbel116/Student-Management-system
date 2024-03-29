@@ -13,6 +13,9 @@
     <!-- loading the css file -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/dashboard.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/login.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('css/try.css')}}" />
+    
+
 
     <!-- loading the font-awesome icos  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />

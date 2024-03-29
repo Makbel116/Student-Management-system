@@ -28,4 +28,8 @@ class Batch extends Model
     public function teacher(){
         return $this->belongsTo(Teacher::class);
     }
+
+    public function schedule(){
+        return $this->belongsTo(Schedule::class);
+    }
 }

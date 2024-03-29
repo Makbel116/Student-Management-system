@@ -4,6 +4,7 @@ use App\Http\Controllers\BatchController;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
@@ -167,3 +168,24 @@ Route::put('/batch/{batch}/update',[BatchController::class,'update'])->middlewar
 //to delete a certain batch
 
 Route::delete('batch/{batch}/delete',[BatchController::class,'destroy'])->middleware('auth');
+
+
+
+
+
+//settings
+
+
+// to view the settings page
+Route::get('/settings',[SettingController::class,'index'])->middleware('auth');
+
+
+//to add a new schedule
+Route::post('/schedule/store',[SettingController::class,'store'])->middleware('auth');
+
+//to delete a schedule
+
+Route::delete('/schedule/{schedule}/delete',[SettingController::class,'destroy'])->middleware('auth');
+
+
+
