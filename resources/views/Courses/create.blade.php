@@ -1,6 +1,4 @@
-@include('partials._head')
-@include('partials._back')
-
+<x-layout>
 <div class="container my-4">
     <div class="row gutters">
 
@@ -68,21 +66,22 @@
                         </div>
 
                     </div>
-                </div>
-
-
-
-
-                <div class="row gutters">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-4">
-                        <div class="text-right">
-
-                            <button type="submit" id="submit" name="submit" class="btn btn-primary">Create</button>
+                    
+                    
+                    
+                    
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-4">
+                            <div class="text-right">
+                                
+                                <button type="submit" id="submit" name="submit" class="btn btn-primary">Create</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
-
         </form>
     </div>
 </div>
+</x-layout>

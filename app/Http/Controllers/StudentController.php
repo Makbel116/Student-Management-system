@@ -18,7 +18,7 @@ class StudentController extends Controller
           return view(
                "Student.index",
                [
-                    "students" => Student::latest()->SimplePaginate(10),
+                    "students" => Student::all(),
                     "title" => "Student List"
                ]
           );

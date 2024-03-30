@@ -1,3 +1,3 @@
-@include('partials._head')
+<x-layout>
 <x-settings-edit  :choosen="$locations" title="Location" />
-@include('partials._footer')
+</x-layout>

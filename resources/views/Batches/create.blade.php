@@ -1,5 +1,4 @@
-@include('partials._head')
-@include('partials._back')
+<x-layout>
 
 <div class="container my-4">
     <div class="row gutters">
@@ -179,3 +178,4 @@
         </form>
     </div>
 </div>
+</x-layout>

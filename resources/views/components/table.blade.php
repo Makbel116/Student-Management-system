@@ -1,8 +1,13 @@
 @props(['title', 'collection'])
 
-<h2 class="my-4">{{ $title }} List</h2>
-<div class="table-responsive small mb-4">
-    <table class="table table-striped table-sm">
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        {{ $title }} List
+    </div>
+    <div class="card-body">
+    <table id="{{$title}}">
         <thead>
             <tr>
 
@@ -45,6 +50,7 @@
                 <th scope="col">&nbsp;</th>
             </tr>
         </thead>
+        
         <tbody>
             @foreach ($collection as $eachRow)
                 <tr>
@@ -105,4 +111,5 @@
 
         </tbody>
     </table>
+</div>
 </div>

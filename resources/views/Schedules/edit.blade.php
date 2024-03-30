@@ -1,3 +1,3 @@
-@include('partials._head')
+<x-layout>
 <x-settings-edit :choosen="$schedules" title="Schedule" />
-@include('partials._footer')
+</x-layout>
