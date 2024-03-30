@@ -17,10 +17,10 @@ class UserController extends Controller
         return view(
             "Users.index",
             [
-                'students' => Student::latest()->get(),
-                'courses' => Course::latest()->get(),
-                'teachers' => Teacher::latest()->get(),
-                "batches" => Batch::latest()->get()
+                'students' => Student::latest()->filter(request(['search']))->get(),
+                'courses' => Course::latest()->filter(request(['search']))->get(),
+                'teachers' => Teacher::latest()->filter(request(['search']))->get(),
+                "batches" => Batch::latest()->filter(request(['search']))->get()
             ]
         );
     }
