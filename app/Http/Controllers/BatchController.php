@@ -33,9 +33,10 @@ class BatchController extends Controller
         // dd($request);
         $formFields = $request->validate([
             'name' => ['required', Rule::unique('batches', 'name')],
+            'phase'=> ['required'],
             'place_id' => '',
             'schedule_id' => '',
-            'start_date' => ['required', 'date'],
+            'start_date' => ['required', 'date','not_past_date'],
             'end_date' => ['required', 'date'],
             'teacher_id' => '',
             'course_id' => ''
@@ -108,13 +109,13 @@ class BatchController extends Controller
             'name' => ['required'],
             'place_id' => '',
             'schedule_id' => '',
-            'start_date' => ['required', 'date'],
+            'phase'=> ['required'],
+            'start_date' => ['required', 'date','not_past_date'],
             'end_date' => ['required', 'date'],
             'teacher_id' => '',
             'course_id' => ''
 
         ]);
-        // dd($formFields);
         $batch->update($formFields);
 
         return redirect('/batch/' . $batch->id . '/view')->with('batch updated successfully!!!');

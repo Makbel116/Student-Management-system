@@ -36,5 +36,12 @@ class AppServiceProvider extends ServiceProvider
         Validator::replacer('no_spaces', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':attribute', $attribute, 'The :attribute field should not contain spaces.');
         });
+        Validator::extend('not_past_date', function ($attribute, $value, $parameters, $validator) {
+            return strtotime($value) >= strtotime('today');
+        });
+    
+        Validator::replacer('not_past_date', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':attribute', $attribute, 'The date must be a date equal to or after today.');
+        });
     }
 }

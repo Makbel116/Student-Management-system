@@ -18,6 +18,7 @@ class BatchFactory extends Factory
             'name'=>'Batch '.$this->faker->numberBetween(0,99),
             'start_date'=>$this->faker->date(),
             'end_date'=>$this->faker->date(),
+            'phase'=>$this->faker->randomElement(['Registeration','Learning','Completed'])
             
         ];
     }

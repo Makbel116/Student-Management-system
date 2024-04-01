@@ -122,7 +122,9 @@
                                 </div>
                             </div>
                         </div>
-
+                        @if ($choosen->phase==='Completed')
+                            <div><a href=""><i class="fas fa-certificate"></i> Generate a Certificate</a></div>
+                        @endif
                     @endif
                 </div>
             </div>

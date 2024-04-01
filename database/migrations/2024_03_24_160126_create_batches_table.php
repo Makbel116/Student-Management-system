@@ -22,6 +22,7 @@ class CreateBatchesTable extends Migration
             $table->date('end_date');
             $table->foreignId('place_id');
             $table->foreignId('schedule_id');
+            $table->string('phase');
             $table->timestamps();
 
         });

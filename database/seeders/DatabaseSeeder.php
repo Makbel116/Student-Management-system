@@ -105,6 +105,8 @@ class DatabaseSeeder extends Seeder
             $batch->students()->attach($assignedStudents->pluck('id')->toArray());
 
             $shuffledStudents = $shuffledStudents->except($assignedStudents->pluck('id')->toArray());
+
+            $shuffledBatches = $shuffledBatches->except($assignedBatches->pluck('id')->toArray());
         }
 
         // Assign 3 remainig shuffled students to 3 different random shuffled batches

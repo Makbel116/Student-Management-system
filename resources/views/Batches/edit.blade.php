@@ -80,6 +80,21 @@
                             </div>
                         </div>
 
+                        {{-- phase --}}
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+                            <div class="form-group">
+                                <label for="phase">Batch Phase</label>
+                                <select class="form-group form-select" name="phase" id="phase"
+                                    value="{{ $batch->phase }}">
+                                    <option value="Registeration">Registeration</option>
+                                    <option value="Learning">Learning</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+                            @error('phase')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 

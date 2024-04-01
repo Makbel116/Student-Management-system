@@ -24,24 +24,25 @@
                     <th scope="col">Location</th>
                     <th scope="col">Status</th>
                     <th scope="col">Phone</th>
-
+                    
                     {{-- students only --}}
                     @if ($title == 'Student')
-                        <th scope="col">Belonged Batch</th>
-
-                        {{-- teachers only --}}
-                        {{-- @else
+                    <th scope="col">Belonged Batch</th>
+                    
+                    {{-- teachers only --}}
+                    {{-- @else
                         <th scope="col">Status</th> --}}
-                    @endif
-
-
-                    {{-- batches only --}}
-                @elseif($title == 'Batch')
-                    <th scope="col">Place</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Start date</th>
-                    <th scope="col">End Date</th>
-
+                        @endif
+                        
+                        
+                        {{-- batches only --}}
+                        @elseif($title == 'Batch')
+                        <th scope="col">Place</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Start date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Phase</th>
+                        
 
                     {{-- courses only --}}
                 @else
@@ -98,6 +99,7 @@
                         @endif
                         <td>{{ $eachRow->start_date }}</td>
                         <td>{{ $eachRow->end_date }}</td>
+                        <td>{{ $eachRow->phase }}</td>
 
 
                         {{-- courses only --}}
