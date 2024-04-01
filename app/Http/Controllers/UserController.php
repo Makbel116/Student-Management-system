@@ -17,8 +17,13 @@ class UserController extends Controller
         $students = Student::latest()->filter(request(['search']))->get();
         $courses = Course::latest()->get();
         $batches = Batch::latest()->get();
+        $teachers = Teacher::latest()->get();
 
-        $studentCount = count($students);
+        $StudentCount = count($students);
+        $CourseCount = count($courses);
+        $BatchCount = count($batches);
+        $TeacherCount = count($teachers);
+
         $dataFromViewforPie = $courses->pluck('name')->toArray();
         $dataFromViewforBar = $batches->pluck('name')->toArray();
         $studentCountsPerBatch = $batches->map(function ($batch) {
@@ -36,7 +41,10 @@ class UserController extends Controller
                 'students',
                 'courses',
                 'batches',
-                'studentCount',
+                'StudentCount',
+                'CourseCount',
+                'BatchCount',
+                'TeacherCount',
                 'dataFromViewforPie',
                 'dataFromViewforBar',
                 'studentCountsPerBatch',

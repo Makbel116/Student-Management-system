@@ -33,8 +33,8 @@
                     <li>
                         <form action="/logout" method="POST">
                             @csrf
-                            <button class="nav-link d-flex align-items-center gap-2" role="button" type="submit">
-                                Sign out
+                            <button class="nav-link border-0  d-flex align-items-center  w-100 bg-white text-dark gap-2" role="button" type="submit">
+                               <i class="fas fa-sign-out"></i> Sign out
                             </button>
                         </form>
                     </li>
