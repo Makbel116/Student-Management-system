@@ -14,14 +14,34 @@ class UserController extends Controller
     //for the home page
     public function index()
     {
+        $students = Student::latest()->filter(request(['search']))->get();
+        $courses = Course::latest()->get();
+        $batches = Batch::latest()->get();
+
+        $studentCount = count($students);
+        $dataFromViewforPie = $courses->pluck('name')->toArray();
+        $dataFromViewforBar = $batches->pluck('name')->toArray();
+        $studentCountsPerBatch = $batches->map(function ($batch) {
+            return $batch->students->count();
+        })->toArray();
+        $studentCountsPerCourse = $courses->map(function ($course) {
+            $studentCount = $course->batch->flatMap(function ($batch) {
+                return $batch->students;
+            })->count();
+            return $studentCount;
+        })->toArray();
         return view(
             "Users.index",
-            [
-                'students' => Student::latest()->filter(request(['search']))->get(),
-                'courses' => Course::latest()->filter(request(['search']))->get(),
-                'teachers' => Teacher::latest()->filter(request(['search']))->get(),
-                "batches" => Batch::latest()->filter(request(['search']))->get()
-            ]
+            compact(
+                'students',
+                'courses',
+                'batches',
+                'studentCount',
+                'dataFromViewforPie',
+                'dataFromViewforBar',
+                'studentCountsPerBatch',
+                'studentCountsPerCourse'
+            )
         );
     }
     //to show the login page

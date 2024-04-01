@@ -15,7 +15,7 @@ class PlaceFactory extends Factory
     {
         return [
             //
-            'name'=>$this->faker->unique()->randomElement(["Megenagna",'Piyasa','Koye Feche']),
+            'name'=>$this->faker->unique()->randomElement(["Megenagna",'Piyasa','Koye Feche','mexico']),
 
         ];
     }

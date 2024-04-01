@@ -17,5 +17,7 @@
 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script  src="{{asset('js/scripts.js')}}" ></script>
 <script  src="{{asset('js/datatables-simple-demo.js')}}" ></script>
+<script src="{{asset('js/chart-pie-demo.js')}}"></script>
+<script src="{{asset('js/chart-bar-demo.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>  
 </html>

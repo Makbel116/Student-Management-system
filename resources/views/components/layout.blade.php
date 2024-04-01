@@ -26,8 +26,7 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/settings">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li><a class="dropdown-item" href="/settings"><i class="fas fa-gear"></i> Settings</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
@@ -53,39 +52,31 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Lists
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/batches">Batch List</a>
-                                <a class="nav-link" href="/students">Students List</a>
-                                <a class="nav-link" href="/courses">Courses List</a>
-                                <a class="nav-link" href="/teachers">Teachers List</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayout" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Registeration
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayout" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/batches">Register a student</a>
-                                <a class="nav-link" href="/teacher/register"> Register a teacher</a>
-                                <a class="nav-link" href="/course/register"> Start a new course</a>
-                                <a class="nav-link" href="/batch/register">Start a new batch</a>
-                            </nav>
-
-                        </div>
+                        <div class="sb-sidenav-menu-heading">Tables</div>
+                            <a class="nav-link" href="/students">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Students
+                            </a>
+                            <a class="nav-link" href="/batches">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Batches
+                            </a>
+                            <a class="nav-link" href="/courses">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Courses
+                            </a>
+                            <a class="nav-link" href="/teachers">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Teachers
+                            </a>
+                        
+                            <div class="sb-sidenav-menu-heading">Settings</div>
+                            <a class="nav-link" href="/settings">
+                                <div class="sb-nav-link-icon"><i class="fas fa-gear"></i></div>
+                                Settings
+                            </a>
                     </div>
+
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>

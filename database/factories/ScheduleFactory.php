@@ -14,7 +14,7 @@ class ScheduleFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->unique()->randomElement(['Morning Session(3:00-4:30)','Afternoon Session (8:00-9:30)','VIP session'])
+            'name'=>$this->faker->unique()->randomElement(['Morning Session(3:00-4:30)','Afternoon Session (8:00-9:30)','VIP session','Weekend'])
         ];
     }
 }

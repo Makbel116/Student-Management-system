@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(1)->create();
 
         $locations = Location::factory(11)->create();
-        $places= Place::factory(3)->create();
+        $places= Place::factory(4)->create();
 
         //creates 2 teachers 
         for ($i = 0; $i < 2; $i++) {
@@ -37,16 +37,15 @@ class DatabaseSeeder extends Seeder
         $teachers = Teacher::all();
 
         //creates 4 courses
-        //each teachers is assigned with 2 courses
         Course::factory(4)->create();
 
         //holds the 4 courses created
         $courses = Course::all();
 
-        $schedules = Schedule::factory(3)->create();
+        $schedules = Schedule::factory(4)->create();
         //creates 8 batches
         //each courses are assiged with 2 batches assuming each teachers teached 4 batches
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             foreach ($teachers as $teacher) {
 
                 Batch::factory()->create([
@@ -84,7 +83,7 @@ class DatabaseSeeder extends Seeder
         // Loop through each of shuffled batch and assign 40 of the shuffled students
         foreach ($batches as $batch) {
             // Take the first five students
-            $assignedStudents = $shuffledStudents->take(7);
+            $assignedStudents = $shuffledStudents->take(5);
 
             // Attach the students to the batch
             $batch->students()->attach($assignedStudents);
@@ -99,7 +98,7 @@ class DatabaseSeeder extends Seeder
 
 
         // Assign 7 remainig shuffled students to two different random shuffled batches
-        $assignedStudents = $shuffledStudents->take(5);
+        $assignedStudents = $shuffledStudents->take(7);
         $assignedBatches = $shuffledBatches->take(2);
 
         foreach ($assignedBatches as $batch) {
