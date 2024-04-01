@@ -34,7 +34,7 @@ class TeacherController extends Controller
     {
         $formFields = $request->validate([
             'name' => ['required'],
-            'age' => ['max:3'],
+            'age' => ['max:2'],
             'email' => ['email', Rule::unique('teachers', 'email')],
             'phone_number' => ['required', 'min:10'],
             'status' => '',
@@ -82,7 +82,7 @@ class TeacherController extends Controller
     {
         $formFields = $request->validate([
             'name' => ['required'],
-            'age' => ['max:3'],
+            'age' => ['max:2'],
             'email' => ['email'],
             'phone_number' => ['required', 'min:10'],
             'status' => '',

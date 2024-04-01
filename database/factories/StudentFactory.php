@@ -23,7 +23,8 @@ class StudentFactory extends Factory
             'status'=>$this->faker->randomElement(['Fresh','Junior','Senior']),
             'preffered_time'=>$this->faker->randomElement(['Morning','Afternoon']),
             'recommendation'=>$this->faker->randomElement(['Friends','Online Course Advertisement','Online Reviews and Testimonials','Course Previews or Demos','Online Communities and Social
-            Media'])
+            Media']),
+            'remaining_payment'=>$this->faker->optional($weight=0.4,$default = null)->numberBetween(400,900),
         ];
     }
 }

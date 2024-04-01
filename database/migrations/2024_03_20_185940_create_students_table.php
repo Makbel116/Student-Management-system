@@ -24,6 +24,7 @@ class CreateStudentsTable extends Migration
             $table->enum('status',['Fresh','Junior','Senior']);
             $table->enum('preffered_time',['Morning','Afternoon']);
             $table->string('recommendation')->nullable();
+            $table->integer('remaining_payment')->nullable();
             $table->timestamps();
         });
     }

@@ -38,7 +38,7 @@ class StudentController extends Controller
      {
           $formFields = $request->validate([
                'name' => ['required'],
-               'age' => ['max:3'],
+               'age' => ['max:2'],
                'email' => ['email', Rule::unique('students', 'email')],
                'phone_number' => ['required', 'min:10'],
                'status' => '',
@@ -46,6 +46,8 @@ class StudentController extends Controller
                'location_id' => '',
                'preffered_time' => '',
                'recommendation' => '',
+               'remaining_payment'=>['gt:0']
+
           ]);
 
           $student = Student::create($formFields);
@@ -122,7 +124,7 @@ class StudentController extends Controller
      {
           $formFields = $request->validate([
                'name' => ['required'],
-               'age' => ['max:3'],
+               'age' => ['max:2'],
                'email' => ['email'],
                'phone_number' => ['required', 'min:10'],
                'status' => '',
@@ -131,7 +133,9 @@ class StudentController extends Controller
                'preffered_time' => '',
                'recommendation' => '',
                'assigned_batches' => '',
-               'not_assigned_batches' => ''
+               'not_assigned_batches' => '',
+               'remaining_payment'=>""
+
           ]);
 
           // Remove From a batch
