@@ -46,7 +46,7 @@ class StudentController extends Controller
                'location_id' => '',
                'preffered_time' => '',
                'recommendation' => '',
-               'remaining_payment'=>['gt:0']
+               'remaining_payment'=>''
 
           ]);
 
@@ -134,10 +134,26 @@ class StudentController extends Controller
                'recommendation' => '',
                'assigned_batches' => '',
                'not_assigned_batches' => '',
-               'remaining_payment'=>""
+               'remaining_payment'=>"",
+               'drop_out'=>""
 
           ]);
 
+          // Append the new drop_out value to the existing value
+          $existingDropOut = $student->drop_out;
+          if ($request->drop_out) {
+                
+               $formFields['drop_out'] = $existingDropOut . '  ' . $formFields['drop_out'];
+                
+               $student->batches()->detach(Batch::where('name', $student->drop_out)->first());
+               
+               $student->update($formFields);
+           }
+           else{
+               $formFields['drop_out'] = $existingDropOut;
+           }
+
+            
           // Remove From a batch
           if ($request->assigned_batches) {
                $student->batches()->detach(Batch::find($request->assigned_batches));

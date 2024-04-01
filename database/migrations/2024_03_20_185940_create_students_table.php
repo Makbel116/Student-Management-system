@@ -25,6 +25,7 @@ class CreateStudentsTable extends Migration
             $table->enum('preffered_time',['Morning','Afternoon']);
             $table->string('recommendation')->nullable();
             $table->integer('remaining_payment')->nullable();
+            $table->string('drop_out')->nullable();
             $table->timestamps();
         });
     }

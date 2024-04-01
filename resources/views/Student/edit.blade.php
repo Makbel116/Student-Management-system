@@ -242,12 +242,40 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="row gutters">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-4">
-                                    <div class="text-right">
 
-                                        <button type="submit" id="submit" name="submit"
-                                            class="btn btn-primary">Update</button>
+                            {{-- dropouts --}}
+                            <div class="card-body">
+                                <div class="row gutters">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
+                                        <h6 class="mt-3 mb-2 text-primary">Course Details</h6>
+                                        <div class="form-group">
+                                            <label for="drop_out" class="mx-4">Drop out of </label>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="drop_out"
+                                                    id="drop_out1" value="" checked>
+                                                <label class="form-check-label" for="drop_out1">
+                                                    None
+                                                </label>
+                                            </div>
+                                            @foreach ($assigned_batch as $batch)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="drop_out"
+                                                        id="drop_out_{{$batch->id}}" value="{{$batch->name}}">
+                                                    <label class="form-check-label" for="drop_out_{{$batch->id}}">
+                                                        {{$batch->name}}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="row gutters">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-4">
+                                            <div class="text-right">
+
+                                                <button type="submit" id="submit" name="submit"
+                                                    class="btn btn-primary">Update</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

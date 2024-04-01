@@ -32,7 +32,8 @@ class Student extends Model
         'preffered_time',
         'recommendation',
         'batch_id',
-        'remaining_payment'
+        'remaining_payment',
+        'drop_out'
     ];
     public function batches(){
         return $this->belongsToMany(Batch::class);
