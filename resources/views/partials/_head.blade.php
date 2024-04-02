@@ -16,7 +16,7 @@
 
     <!-- loading the css file -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/radioboxes.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/try.css') }}" />
 
     {{-- loading charts --}}

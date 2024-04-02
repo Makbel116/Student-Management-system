@@ -18,7 +18,7 @@ class StudentController extends Controller
           return view(
                "Student.index",
                [
-                    "students" => Student::all(),
+                    "students" => Student::latest()->get(),
                     "title" => "Student List"
                ]
           );
@@ -30,7 +30,7 @@ class StudentController extends Controller
                "Student.create",
                [
                     "batches" => Batch::select('id', 'name')->get(),
-                    "locations" => Location::all()
+                    "locations" => Location::orderBy('name')->get()
                ]
           );
      }
@@ -115,7 +115,7 @@ class StudentController extends Controller
                     "batches" => Batch::select('id', 'name')->get(),
                     "assigned_batch" => $assigned_batches,
                     "not_assigned_batches" => $not_assigned_batches,
-                    "locations" => Location::all()
+                    "locations" => Location::orderBy('name')->get()
                ]
           );
      }

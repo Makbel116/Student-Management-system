@@ -107,20 +107,26 @@
 
 
                         {{-- course name --}}
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                            <div class="form-group">
-                                <label for="Teacher">Choose your course</label>
-                                <select class="form-group form-select" name="course_id" id="Teacher">
+                     
+                        <div class=" container row  my-2">
+                            <div class=" text-center gutters">
+                                <div class="form-group w-100">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
+                                        <h6 class="mt-3 mb-2 text-primary">Choose your course</h6>
+                                    </div>
                                     @foreach ($courses as $course)
-                                        <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                        <label for="{{ $course->id }}" class="btn btn-success my-1">{{ $course->name }}
+                                            <input type="radio" name="course_id"
+                                                value="{{ $course->id }}" id="{{ $course->id }}"
+                                                class="badgebox"><span class="badge">&check;</span></label>
                                     @endforeach
-                                </select>
+                                    @error('course_id')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                            @error('course_id')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
                         </div>
-
+                        
                         <div class="card-body">
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">

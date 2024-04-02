@@ -19,9 +19,9 @@ class SettingController extends Controller
         return view(
             "Settings.index",
             [
-                'schedules' => Schedule::all(),
-                'locations' => Location::all(),
-                'places' => Place::all()
+                'schedules' => Schedule::orderBy('name')->get(),
+                'locations' => Location::orderBy('name')->get(),
+                'places' => Place::orderBy('name')->get()
             ]
         );
     }
@@ -38,7 +38,7 @@ class SettingController extends Controller
         return view(
             'Schedules.edit',
             [
-                'schedules' => Schedule::all()
+                'schedules' => Schedule::orderBy('name')->get()
             ]
         );
     }
@@ -71,7 +71,7 @@ class SettingController extends Controller
         return view(
             'Location.edit',
             [
-                'locations' => Location::all()
+                'locations' => Location::orderBy('name')->get()
             ]
         );
     }
@@ -107,7 +107,7 @@ class SettingController extends Controller
         return view(
             'Places.edit',
             [
-                'places' => Place::all()
+                'places' => Place::orderBy('name')->get()
             ]
         );
     }

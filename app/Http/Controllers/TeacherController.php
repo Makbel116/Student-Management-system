@@ -18,7 +18,7 @@ class TeacherController extends Controller
             "Teachers.index",
             [
                 "teachers" => Teacher::latest()->get(),
-                "locations" =>  Location::all()
+                "locations" =>  Location::orderBy('name')->get()
             ]
         );
     }
@@ -75,7 +75,7 @@ class TeacherController extends Controller
     {
         return view('Teachers.edit', [
             "teacher" => $teacher,
-            "locations" => Location::all()
+            "locations" => Location::orderBy('name')->get()
         ]);
     }
     public function update(Teacher $teacher, Request $request)

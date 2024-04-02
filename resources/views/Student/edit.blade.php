@@ -166,12 +166,31 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+                                <div class="form-group">
+                                    <label for="Prefference">Preffered Time</label>
+                                    <select class="form-group form-select" name="preffered_time" id="Prefference"
+                                        value="{{ $student->preffered_time }}">
+                                        <option value="Morning">Morning</option>
+                                        <option value="Afternoon">Afternoon</option>
+                                    </select>
+                                </div>
+                                @error('preffered_time')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
+                        </div>
+
+                        {{-- preffered_time --}}
 
                     {{-- remaining payment --}}
                     <div class="card-body">
                         <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
+                                <h6 class="mt-3 mb-2 text-primary">Payment Details</h6>
+                            </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                                 <div class="form-group">
                                     <label for="remaining_payment">Remaining Payment</label>
@@ -196,91 +215,96 @@
 
 
                             {{-- Remove From a batch --}}
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                                <div class="form-group">
-                                    <label for="batch">Remove From a batch</label>
-                                    <select class="form-group form-select" name="assigned_batches" id="batch">
-                                        <option value=""></option>
+                            
+                            <div class=" container row  my-2">
+                                <div class=" text-center gutters">
+                                    <div class="form-group w-100">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
+                                            <h6 class="mt-3 mb-2 text-primary">Remove From a batch</h6>
+                                        </div>
+                                        <label for="warning" class="btn btn-warning my-1">None
+                                            <input type="radio" name="assigned_batches"
+                                                value="" id="warning"
+                                                class="badgebox"><span class="badge">&check;</span></label>
                                         @foreach ($assigned_batch as $batch)
-                                            <option value="{{ $batch->id }}">{{ $batch->name }}</option>
+                                            <label for="{{ $batch->id }}" class="btn btn-warning my-1">{{ $batch->name }}
+                                                <input type="radio" name="assigned_batches"
+                                                    value="{{ $batch->id }}" id="{{ $batch->id }}"
+                                                    class="badgebox"><span class="badge">&check;</span></label>
                                         @endforeach
-                                    </select>
+                                        @error('assigned_batches')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
                                 </div>
-                                @error('assigned_batches')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
                             </div>
-
 
 
                             {{-- Add to Other batch --}}
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                                <div class="form-group">
-                                    <label for="batch">Add to Other batch</label>
-                                    <select class="form-group form-select" name="not_assigned_batches"
-                                        id="batch">
-                                        <option value="" selected></option>
-                                        @foreach ($not_assigned_batches as $batch)
-                                            <option value="{{ $batch->id }}">{{ $batch->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @error('not_assigned_batches')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                                <div class="form-group">
-                                    <label for="Prefference">Preffered Time</label>
-                                    <select class="form-group form-select" name="preffered_time" id="Prefference"
-                                        value="{{ $student->preffered_time }}">
-                                        <option value="Morning">Morning</option>
-                                        <option value="Afternoon">Afternoon</option>
-                                    </select>
-                                </div>
-                                @error('preffered_time')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            {{-- dropouts --}}
-                            <div class="card-body">
-                                <div class="row gutters">
+                            
+                        </div>
+                        <div class=" container row  my-2">
+                            <div class=" text-center gutters">
+                                <div class="form-group w-100">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
-                                        <h6 class="mt-3 mb-2 text-primary">Course Details</h6>
-                                        <div class="form-group">
-                                            <label for="drop_out" class="mx-4">Drop out of </label>
+                                        <h6 class="mt-3 mb-2 text-primary">Add to a new banch</h6>
+                                    </div>
+                                    <label for="success" class="btn btn-success my-1">None
+                                        <input type="radio" name="not_assigned_batches"
+                                            value="" id="success"
+                                            class="badgebox"><span class="badge">&check;</span></label>
+                                    @foreach ($not_assigned_batches as $batch)
+                                        <label for="{{ $batch->id }}" class="btn btn-success my-1">{{ $batch->name }}
+                                            <input type="radio" name="not_assigned_batches"
+                                                value="{{ $batch->id }}" id="{{ $batch->id }}"
+                                                class="badgebox"><span class="badge">&check;</span></label>
+                                    @endforeach
+                                    @error('not_assigned_batches')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        {{-- dropouts --}}
+                        <div class="card-body">
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
+                                    <h6 class="mt-3 mb-2 text-primary">For Dropouts</h6>
+                                    <div class="form-group">
+                                        <label for="drop_out" class="mx-4">Drop out of </label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="drop_out"
+                                                id="drop_out1" value="" checked>
+                                            <label class="form-check-label" for="drop_out1">
+                                                None
+                                            </label>
+                                        </div>
+                                        @foreach ($assigned_batch as $batch)
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="drop_out"
-                                                    id="drop_out1" value="" checked>
-                                                <label class="form-check-label" for="drop_out1">
-                                                    None
+                                                    id="drop_out_{{ $batch->id }}" value="{{ $batch->name }}">
+                                                <label class="form-check-label" for="drop_out_{{ $batch->id }}">
+                                                    {{ $batch->name }}
                                                 </label>
                                             </div>
-                                            @foreach ($assigned_batch as $batch)
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="drop_out"
-                                                        id="drop_out_{{$batch->id}}" value="{{$batch->name}}">
-                                                    <label class="form-check-label" for="drop_out_{{$batch->id}}">
-                                                        {{$batch->name}}
-                                                    </label>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                        @endforeach
                                     </div>
-                                    <div class="row gutters">
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-4">
-                                            <div class="text-right">
+                                </div>
+                                <div class="row gutters">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-4">
+                                        <div class="text-right">
 
-                                                <button type="submit" id="submit" name="submit"
-                                                    class="btn btn-primary">Update</button>
-                                            </div>
+                                            <button type="submit" id="submit" name="submit"
+                                                class="btn btn-primary">Update</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
             </form>
         </div>

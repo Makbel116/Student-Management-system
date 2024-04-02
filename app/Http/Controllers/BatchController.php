@@ -22,10 +22,10 @@ class BatchController extends Controller
     public function create()
     {
         return view('Batches.create', [
-            "teachers" => Teacher::all(),
-            "courses" => Course::all(),
-            "schedules" => Schedule::all(),
-            "places" => Place::all()
+            "teachers" => Teacher::orderBy('name')->get(),
+            "courses" => Course::orderBy('name')->get(),
+            "schedules" => Schedule::orderBy('name')->get(),
+            "places" => Place::orderBy('name')->get()
         ]);
     }
     public function store(Request $request)
@@ -38,8 +38,8 @@ class BatchController extends Controller
             'schedule_id' => '',
             'start_date' => ['required', 'date','not_past_date'],
             'end_date' => ['required', 'date'],
-            'teacher_id' => '',
-            'course_id' => ''
+            'teacher_id' => ['required'],
+            'course_id' => ['required']
 
         ]);
 
@@ -93,11 +93,11 @@ class BatchController extends Controller
             "Batches.edit",
             [
                 "batch" => $batch,
-                "teachers" => Teacher::all(),
-                "courses" => Course::all(),
+                "teachers" => Teacher::orderBy('name')->get(),
+                "courses" => Course::orderBy('name')->get(),
                 'most_preffered' => $most_preffered,
-                "schedules" => Schedule::all(),
-                "places" => Place::all()
+                "schedules" => Schedule::orderBy('name')->get(),
+                "places" => Place::orderBy('name')->get()
             ]
         );
     }
@@ -112,8 +112,8 @@ class BatchController extends Controller
             'phase'=> ['required'],
             'start_date' => ['required', 'date','not_past_date'],
             'end_date' => ['required', 'date'],
-            'teacher_id' => '',
-            'course_id' => ''
+            'teacher_id' => ['required'],
+            'course_id' => ['required']
 
         ]);
         $batch->update($formFields);

@@ -167,6 +167,20 @@
                                 @enderror
                             </div>
                         </div>
+                        {{-- preffered time --}}
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+                            <div class="form-group">
+                                <label for="Prefference">Preffered Time</label>
+                                <select class="form-group form-select" name="preffered_time" id="Prefference"
+                                    value="{{ old('preffered_time') }}">
+                                    <option value="Morning">Morning</option>
+                                    <option value="Afternoon">Afternoon</option>
+                                </select>
+                            </div>
+                            @error('preffered_time')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
 
 
@@ -181,36 +195,32 @@
 
 
                             {{-- Assign batch --}}
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                                <div class="form-group">
-                                    <label for="batch">Assign batch</label>
-                                    <select class="form-group form-select" name="batch_id" id="batch"
-                                        value="{{ old('batch_id') }}">
-                                        <option value=""></option>
+                            
+                            <div class=" container row  my-2">
+                                <div class=" text-center gutters">
+                                    <div class="form-group w-100">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
+                                            <h6 class="mt-3 mb-2 text-primary">Assign batch</h6>
+                                        </div>
+                                         
+                                        <label for="success" class="btn btn-success my-1">None
+                                            <input type="radio" name="batch_id"
+                                                value="" id="success"
+                                                class="badgebox"><span class="badge">&check;</span></label>
+
                                         @foreach ($batches as $batch)
-                                            <option value="{{ $batch->id }}">{{ $batch->name }}</option>
+                                            <label for="{{ $batch->id }}" class="btn btn-success my-1">{{ $batch->name }}
+                                                <input type="radio" name="batch_id"
+                                                    value="{{ $batch->id }}" id="{{ $batch->id }}"
+                                                    class="badgebox"><span class="badge">&check;</span></label>
                                         @endforeach
-                                    </select>
+                                        @error('batch_id')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
                                 </div>
-                                @error('batch_id')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
                             </div>
 
-                            {{-- preffered time --}}
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
-                                <div class="form-group">
-                                    <label for="Prefference">Preffered Time</label>
-                                    <select class="form-group form-select" name="preffered_time" id="Prefference"
-                                        value="{{ old('preffered_time') }}">
-                                        <option value="Morning">Morning</option>
-                                        <option value="Afternoon">Afternoon</option>
-                                    </select>
-                                </div>
-                                @error('preffered_time')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
 
                         </div>
                     </div>
@@ -228,7 +238,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 my-2">
                                 <div class="form-group">
                                     <label for="remaining_payment">Remaining Payment</label>
-                                    <input type="number"  name="remaining_payment" class="form-control"
+                                    <input type="number" name="remaining_payment" class="form-control"
                                         id="remaining_payment" value="{{ old('remaining_payment') }}">
                                     </input>
                                 </div>
