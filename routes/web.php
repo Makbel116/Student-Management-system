@@ -4,6 +4,7 @@ use App\Http\Controllers\BatchController;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -216,3 +217,11 @@ Route::post('/place/store',[SettingController::class,'place_store'])->middleware
 //to delete a place
 
 Route::delete('/place/{place}/delete',[SettingController::class,'place_destroy'])->middleware('auth');
+
+
+// certificate
+
+//to generate a certificate
+
+Route::post('/generate-pdf/{batch}',[PDFController::class,'generatePDF'])->middleware('auth');
+

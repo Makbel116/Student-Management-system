@@ -123,7 +123,10 @@
                             </div>
                         </div>
                         @if ($choosen->phase==='Completed')
-                            <div><a href=""><i class="fas fa-certificate"></i> Generate a Certificate</a></div>
+                            <div><form action="/generate-pdf/{{$choosen->id}}" method="POST">
+                                @csrf
+                                <button type="submit" class=" border-0  d-flex align-items-center  w-100 bg-white text-primary gap-2"><i class="fas fa-certificate "></i> Generate a Certificate</button></div>
+                            </form>
                         @endif
                     @endif
                 </div>
