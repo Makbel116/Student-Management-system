@@ -73,7 +73,17 @@ Route::get('/student/{student}/edit',[StudentController::class,'edit'])->middlew
 
 Route::put('/student/{student}/update',[StudentController::class,'update'])->middleware('auth');
 
+//to dropout a student from a batch
 
+Route::post('/student/{student}/{batch}/dropout',[StudentController::class,'dropout'])->middleware('auth');
+
+//to remove a student from a batch
+
+Route::post('/student/{student}/{batch}/remove',[StudentController::class,'remove'])->middleware('auth');
+
+// to add a student to a new batch 
+
+Route::post('/student/{student}/assign',[StudentController::class,'assign'])->middleware('auth');
 
 
 

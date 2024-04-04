@@ -185,46 +185,6 @@
 
 
 
-                    {{-- Course Details --}}
-                    <div class="card-body">
-                        <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
-                                <h6 class="mt-3 mb-2 text-primary">Course Details</h6>
-                            </div>
-
-
-
-                            {{-- Assign batch --}}
-                            
-                            <div class=" container row  my-2">
-                                <div class=" text-center gutters">
-                                    <div class="form-group w-100">
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2">
-                                            <h6 class="mt-3 mb-2 text-primary">Assign batch</h6>
-                                        </div>
-                                         
-                                        <label for="success" class="btn btn-success my-1">None
-                                            <input type="radio" name="batch_id"
-                                                value="" id="success"
-                                                class="badgebox"><span class="badge">&check;</span></label>
-
-                                        @foreach ($batches as $batch)
-                                            <label for="{{ $batch->id }}" class="btn btn-success my-1">{{ $batch->name }}
-                                                <input type="radio" name="batch_id"
-                                                    value="{{ $batch->id }}" id="{{ $batch->id }}"
-                                                    class="badgebox"><span class="badge">&check;</span></label>
-                                        @endforeach
-                                        @error('batch_id')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
                     {{-- payment details --}}
                     <div class="card-body">
                         <div class="row gutters">

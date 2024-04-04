@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Location;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
@@ -46,16 +47,11 @@ class StudentController extends Controller
                'location_id' => '',
                'preffered_time' => '',
                'recommendation' => '',
-               'remaining_payment'=>''
+               'remaining_payment' => ''
 
           ]);
 
           $student = Student::create($formFields);
-
-          //assigns batches with students
-          if ($request->batch_id) {
-               $student->batches()->attach(Batch::find($request->batch_id));
-          }
 
           return redirect('/students')->with("message", 'Student registered successfully!!!');
      }
@@ -82,39 +78,12 @@ class StudentController extends Controller
 
      public function edit(Student $student)
      {
-          // fetch all batches
-          $all_batches = Batch::all();
-
-          //fetch assigned_batches if the user wants to remove them
-          $assigned_batches = $student->batches()->get();
-
-          $not_assigned_batches = [];
-
-          //checks if a batch is not assigned and not duplicated each time it is checked
-          foreach ($all_batches as $batch) {
-               $isAssigned = false;
-
-               foreach ($assigned_batches as $assigned_batch) {
-                    if ($batch->id === $assigned_batch->id) {
-                         $isAssigned = true;
-                         break;
-                    }
-               }
-
-               if (!$isAssigned && !in_array($batch, $not_assigned_batches)) {
-                    //puts not assigned batches if the user wants to assign them to  student
-                    array_push($not_assigned_batches, $batch);
-               }
-          }
-
-
+     
           return view(
                'Student.edit',
                [
                     "student" => $student,
                     "batches" => Batch::select('id', 'name')->get(),
-                    "assigned_batch" => $assigned_batches,
-                    "not_assigned_batches" => $not_assigned_batches,
                     "locations" => Location::orderBy('name')->get()
                ]
           );
@@ -132,39 +101,56 @@ class StudentController extends Controller
                'location_id' => '',
                'preffered_time' => '',
                'recommendation' => '',
-               'assigned_batches' => '',
-               'not_assigned_batches' => '',
-               'remaining_payment'=>"",
-               'drop_out'=>""
+               'remaining_payment' => "",
 
           ]);
 
-          // Append the new drop_out value to the existing value
-          $existingDropOut = $student->drop_out;
-          if ($request->drop_out) {
-                
-               $formFields['drop_out'] = $existingDropOut . '  ' . $formFields['drop_out'];
-                
-               $student->batches()->detach(Batch::where('name', $student->drop_out)->first());
-               
-               $student->update($formFields);
-           }
-           else{
-               $formFields['drop_out'] = $existingDropOut;
-           }
 
-            
-          // Remove From a batch
-          if ($request->assigned_batches) {
-               $student->batches()->detach(Batch::find($request->assigned_batches));
-          }
-
-          // add to a batch
-          if ($request->not_assigned_batches) {
-               $student->batches()->attach(Batch::find($request->not_assigned_batches));
-          }
 
           $student->update($formFields);
           return redirect('/student/' . $student->id . '/view')->with("message", 'student updated successfully!!!');
+     }
+
+
+     public function dropout(Student $student, Batch $batch)
+     {
+
+          // Append the new drop_out value using a consistent separator
+          $existingDropout = $student->drop_out;
+
+          if ($existingDropout !== null) {
+               $student->drop_out = $existingDropout . ' ' . $batch->name;
+          } else {
+               $student->drop_out = $batch->name;
+          }
+
+          // Save the student record with the updated drop_out 
+          $student->save();
+
+          // Detach the student from the batch
+          $student->batches()->detach($batch);
+
+          // Return a success message with proper redirection
+          return redirect('/student/' . $student->id . '/view')
+               ->with('message', 'Student successfully dropped out from batch!');
+     }
+
+     public function remove(Student $student, Batch $batch)
+     {
+
+          // Remove From a batch
+          
+               $student->batches()->detach($batch);
+
+               return redirect('/student/' . $student->id . '/view')
+               ->with('message', 'Student successfully removed from batch!');
+     }
+
+     public function assign(Student $student,Request $request){
+
+          $student->batches()->attach(Batch::find($request->batch));
+
+          return redirect('/student/' . $student->id . '/view')
+               ->with('message', 'Student successfully added to batch!');
      }
 }

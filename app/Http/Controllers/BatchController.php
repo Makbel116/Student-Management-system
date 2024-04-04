@@ -37,7 +37,7 @@ class BatchController extends Controller
             'place_id' => '',
             'schedule_id' => '',
             'start_date' => ['required', 'date','not_past_date'],
-            'end_date' => ['required', 'date'],
+            'end_date' => ['required', 'date','not_past_date'],
             'teacher_id' => ['required'],
             'course_id' => ['required']
 
@@ -111,7 +111,7 @@ class BatchController extends Controller
             'schedule_id' => '',
             'phase'=> ['required'],
             'start_date' => ['required', 'date','not_past_date'],
-            'end_date' => ['required', 'date'],
+            'end_date' => ['required', 'date','not_past_date'],
             'teacher_id' => ['required'],
             'course_id' => ['required']
 
