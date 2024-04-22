@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Course;
-use App\Models\Student;
-use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\MailController;
@@ -24,233 +21,269 @@ use App\Http\Controllers\TeacherController;
 |
 */
 
+Route::middleware(['middleware' => 'guest'])->group(function () {
 
-//to get the home page
+    Route::controller(UserController::class)->group(function () {
 
-Route::get('/', [UserController::class, 'index'])->middleware('auth');
+        //to get to the login page
 
-//to get to the login page
+        Route::get('/login', 'login')->name('login');
 
-Route::get('/login', [UserController::class, 'login'])->middleware('guest')->name('login');
+        //to get forget password page
 
-//user authentcation to login
+        Route::get("/forgot-password", 'forgot_password');
 
-Route::post("/user/authentcation", [UserController::class, 'authentcation']);
+        //to get the reset for password page
 
-//user logout
+        Route::get("/reset/{username}/{token}", 'reset_password');
 
-Route::post("/logout", [UserController::class, 'logout']);
+        //to update the password
 
-//to get forget password page
+        Route::post("/reset/{username}/{token}", 'update_password');
 
-Route::get("/forgot-password", [UserController::class, 'forgot_password'])->middleware('guest');
+        //user authentcation to login
 
-//to get the reset for password page
+        Route::post("/user/authentcation", 'authentcation');
+    });
+});
 
-Route::get("/reset/{username}/{token}", [UserController::class, 'reset_password'])->middleware('guest');
 
-//to update the password
 
-Route::post("/reset/{username}/{token}", [UserController::class, 'update_password'])->middleware('guest');
 
+Route::middleware(['middleware' => 'auth'])->group(function () {
 
+    Route::controller(UserController::class)->group(function () {
 
+        //to get the home page
 
+        Route::get('/', 'index');
 
-//students
 
-//to get the list of students
-Route::get('/students', [StudentController::class, 'index'])->middleware('auth');
+        //user logout
 
-//to show a Student registeration page
+        Route::post("/logout", 'logout');
+    });
 
-Route::get('/student/register', [StudentController::class, 'create'])->middleware('auth');
 
-//to store the student
+    //students
 
-Route::post('/student/store', [StudentController::class, 'store'])->middleware('auth');
+    Route::controller(StudentController::class)->group(function () {
 
-//to view each student detail
+        //to get the list of students
+        Route::get('/students',  'index');
 
-Route::get('/student/{student}/view', [StudentController::class, 'show'])->middleware('auth');
+        Route::prefix('student')->group(function () {
+            //to show a Student registeration page
 
-//to delete a certain student
+            Route::get('/register',  'create');
 
-Route::delete('/student/{student}/delete', [StudentController::class, 'destroy'])->middleware('auth');
+            //to store the student
 
-//to show edit page a student details
+            Route::post('/store',  'store');
 
-Route::get('/student/{student}/edit', [StudentController::class, 'edit'])->middleware('auth');
+            //to view each student detail
 
-//to update the edited student details
+            Route::get('/{student}/view',  'show');
 
-Route::put('/student/{student}/update', [StudentController::class, 'update'])->middleware('auth');
+            //to delete a certain student
 
-//to dropout a student from a batch
+            Route::delete('/{student}/delete',  'destroy');
 
-Route::post('/student/{student}/{batch}/dropout', [StudentController::class, 'dropout'])->middleware('auth');
+            //to show edit page a student details
 
-//to remove a student from a batch
+            Route::get('/{student}/edit',  'edit');
 
-Route::post('/student/{student}/{batch}/remove', [StudentController::class, 'remove'])->middleware('auth');
+            //to update the edited student details
 
-// to add a student to a new batch 
+            Route::put('/{student}/update',  'update');
 
-Route::post('/student/{student}/assign', [StudentController::class, 'assign'])->middleware('auth');
+            //to dropout a student from a batch
 
+            Route::post('/{student}/{batch}/dropout',  'dropout');
 
+            //to remove a student from a batch
 
-//courses
+            Route::post('/{student}/{batch}/remove',  'remove');
 
-//to get the list of courses
-Route::get('/courses', [CourseController::class, 'index'])->middleware('auth');
+            // to add a student to a new batch 
 
-//to show a course register page
+            Route::post('/{student}/assign',  'assign');
+        });
+    });
 
-Route::get('/course/register', [CourseController::class, 'create'])->middleware('auth');
 
-//to store created courses
 
-Route::post('/course/store', [CourseController::class, 'store'])->middleware('auth');
+    //courses
 
-//to view each course detail
+    Route::controller(CourseController::class)->group(function () {
+        //to get the list of courses
+        Route::get('/courses', 'index');
 
-Route::get('/course/{course}/view', [CourseController::class, 'show'])->middleware('auth');
+        Route::prefix('course')->group(function () {
 
-//to delete a certain student
+            //to show a course register page
 
-Route::delete('/course/{course}/delete', [CourseController::class, 'destroy'])->middleware('auth');
+            Route::get('/register', 'create');
 
-//to show edit page a course details
+            //to store created courses
 
-Route::get('/course/{course}/edit', [CourseController::class, 'edit'])->middleware('auth');
+            Route::post('/store', 'store');
 
-//to update the edited courses details
+            //to view each course detail
 
-Route::put('/course/{course}/update', [CourseController::class, 'update'])->middleware('auth');
+            Route::get('/{course}/view', 'show');
 
+            //to delete a certain student
 
+            Route::delete('/{course}/delete', 'destroy');
 
+            //to show edit page a course details
 
-//teachers
+            Route::get('/{course}/edit', 'edit');
 
-//to get the list of teachers
-Route::get('/teachers', [TeacherController::class, 'index'])->middleware('auth');
+            //to update the edited courses details
 
-//to show the registeratio page for teachers
+            Route::put('/{course}/update', 'update');
+        });
+    });
 
-Route::get('/teacher/register', [TeacherController::class, 'create'])->middleware('auth');
 
-//to store the teacher
+    //teachers
+    Route::controller(TeacherController::class)->group(function () {
+        //to get the list of teachers
+        Route::get('/teachers',  'index');
 
-Route::post('/teacher/store', [TeacherController::class, 'store'])->middleware('auth');
+        Route::prefix('teacher')->group(function () {
 
-//to view each teacher detail
+            //to show the registeratio page for teachers
 
-Route::get('/teacher/{teacher}/view', [TeacherController::class, 'show'])->middleware('auth');
+            Route::get('/register',  'create');
 
-//to delete a certain student
+            //to store the teacher
 
-Route::delete('teacher/{teacher}/delete', [TeacherController::class, 'destroy'])->middleware('auth');
+            Route::post('/store',  'store');
 
-//to show edit page a teacher details
+            //to view each teacher detail
 
-Route::get('/teacher/{teacher}/edit', [TeacherController::class, 'edit'])->middleware('auth');
+            Route::get('/{teacher}/view',  'show');
 
-//to update the edited teacher details
+            //to delete a certain student
 
-Route::put('/teacher/{teacher}/update', [TeacherController::class, 'update'])->middleware('auth');
+            Route::delete('teacher/{teacher}/delete',  'destroy');
 
+            //to show edit page a teacher details
 
+            Route::get('/{teacher}/edit',  'edit');
 
-//Batches
+            //to update the edited teacher details
 
-// to get the list of the batches
-Route::get('/batches', [BatchController::class, 'index']);
+            Route::put('/{teacher}/update',  'update');
+        });
+    });
 
+    //batches
 
-//to show a batches register page
+    Route::controller(BatchController::class)->group(function () {
 
-Route::get('/batch/register', [BatchController::class, 'create'])->middleware('auth');
+        // to get the list of the batches
+        Route::get('/batches', 'index');
 
-//to store the batch
+        Route::prefix('batch')->group(function () {
 
-Route::post('/batch/store', [BatchController::class, 'store'])->middleware('auth');
+            //to show a batches register page
 
-//to view each batch detail
+            Route::get('/register', 'create');
 
-Route::get('/batch/{batch}/view', [BatchController::class, 'show'])->middleware('auth');
+            //to store the batch
 
-//to show edit page a batch details
+            Route::post('/store', 'store');
 
-Route::get('/batch/{batch}/edit', [BatchController::class, 'edit'])->middleware('auth');
+            //to view each batch detail
 
-//to update the edited batch details
+            Route::get('/{batch}/view', 'show');
 
-Route::put('/batch/{batch}/update', [BatchController::class, 'update'])->middleware('auth');
+            //to show edit page a batch details
 
-//to delete a certain batch
+            Route::get('/{batch}/edit', 'edit');
 
-Route::delete('batch/{batch}/delete', [BatchController::class, 'destroy'])->middleware('auth');
+            //to update the edited batch details
 
+            Route::put('/{batch}/update', 'update');
 
+            //to delete a certain batch
 
+            Route::delete('batch/{batch}/delete', 'destroy');
+        });
+    });
 
 
-//settings
+    //settings
+    Route::controller(SettingController::class)->group(function () {
 
+        // to view the settings page
+        Route::get('/settings', 'index');
 
-// to view the settings page
-Route::get('/settings', [SettingController::class, 'index'])->middleware('auth');
+        // schedule
+        Route::prefix('schedule')->group(function () {
 
-// schedule
+            //to show the edit page for schedule
+            Route::get('/edit', 'schedule_edit');
 
-//to show the edit page for schedule
-Route::get('/schedule/edit', [SettingController::class, 'schedule_edit'])->middleware('auth');
+            //to add a new schedule
+            Route::post('/store', 'schedule_store');
 
-//to add a new schedule
-Route::post('/schedule/store', [SettingController::class, 'schedule_store'])->middleware('auth');
+            //to delete a schedule
 
-//to delete a schedule
+            Route::delete('/{schedule}/delete', 'schedule_destroy');
+        });
 
-Route::delete('/schedule/{schedule}/delete', [SettingController::class, 'schedule_destroy'])->middleware('auth');
 
 
-// location
+        // location
 
-//to show the edit page for location
-Route::get('/location/edit', [SettingController::class, 'location_edit'])->middleware('auth');
+        Route::prefix('location')->group(function () {
 
-//to add a new location
-Route::post('/location/store', [SettingController::class, 'location_store'])->middleware('auth');
+            //to show the edit page for location
+            Route::get('/edit', 'location_edit');
 
-//to delete a location
+            //to add a new location
+            Route::post('/store', 'location_store');
 
-Route::delete('/location/{location}/delete', [SettingController::class, 'location_destroy'])->middleware('auth');
+            //to delete a location
 
+            Route::delete('/{location}/delete', 'location_destroy');
+        });
 
-// places
 
-//to show the edit page for place
-Route::get('/place/edit', [SettingController::class, 'place_edit'])->middleware('auth');
 
-//to add a new place
-Route::post('/place/store', [SettingController::class, 'place_store'])->middleware('auth');
 
-//to delete a place
+        // places
 
-Route::delete('/place/{place}/delete', [SettingController::class, 'place_destroy'])->middleware('auth');
+        Route::prefix('place')->group(function () {
 
+            //to show the edit page for place
+            Route::get('/edit', 'place_edit');
 
-// certificate
+            //to add a new place
+            Route::post('/store', 'place_store');
 
-//to generate a certificate
+            //to delete a place
 
-Route::post('/generate-pdf/{batch}', [PDFController::class, 'generatePDF'])->middleware('auth');
+            Route::delete('/{place}/delete', 'place_destroy');
+        });
+    });
 
+    // certificate
 
-//mail
+    //to generate a certificate
 
-//to send the email for the user
+    Route::post('/generate-pdf/{batch}', [PDFController::class, 'generatePDF']);
 
-Route::post("/forgot-password-email", [MailController::class, 'send_forget_email']);
+
+    //mail
+
+    //to send the email for the user
+
+    Route::post("/forgot-password-email", [MailController::class, 'send_forget_email']);
+    
+});
