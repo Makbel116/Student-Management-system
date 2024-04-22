@@ -41,13 +41,14 @@
                     @if ($title !== 'Batch')
                         {{-- to show the whole table with the given details of batch --}}
                         <h2 class="float-left w-75 d-inline">Related Batches</h2>
-                        
+
                         {{-- to add a student to a batch --}}
                         @if ($title == 'Student')
-                        <div class="d-flex justify-content-end w-25 float-right">
-                            
-                            <button type="button" class=" btn btn-success bg-transparent text-success border-0 p-0 m-0" data-bs-toggle="modal"
-                                    data-bs-target="#ModalAdd">
+                            <div class="d-flex justify-content-end w-25 float-right">
+
+                                <button type="button"
+                                    class=" btn btn-success bg-transparent text-success border-0 p-0 m-0"
+                                    data-bs-toggle="modal" data-bs-target="#ModalAdd">
                                     <i class="fa fa-plus"></i> assign to a new batch
                                 </button>
                             </div>
@@ -159,14 +160,17 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($choosen->phase === 'Completed'  && count($choosen->students)!==0 )
+                        @if ($choosen->phase === 'Completed' && count($choosen->students) !== 0)
                             <div>
-                                <form action="/generate-pdf/{{ $choosen->id }}" method="POST">
+                                <button type="button"  data-bs-toggle="modal"
+                                data-bs-target="#ModalCertificate" class=" border-0  bg-transparent text-primary"><i
+                                        class="fas fa-certificate "></i> Generate a Certificate</button>
+                                {{-- <form action="/generate-pdf/{{ $choosen->id }}" method="POST">
                                     @csrf
                                     <button type="submit"
                                         class=" border-0  d-flex align-items-center  w-100 bg-white text-primary gap-2"><i
                                             class="fas fa-certificate "></i> Generate a Certificate</button>
-                                </form>
+                                </form> --}}
                             </div>
                         @endif
                     @endif
@@ -176,17 +180,14 @@
 
 
             {{-- to show the buttons to edit and delete --}}
-            <form action="/{{ strtolower($title) . '/' . $choosen->id . '/delete' }}" method="POST">
-                @csrf
-                @method('delete')
-                <a href="/{{ strtolower($title) }}/{{ $choosen->id }}/edit" role="button"
-                    class="btn btn-warning mx-4"><i class="fa fa-pencil"></i>
-                    Edit</a>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalDelete">
-                    <i class="fa fa-trash"></i> Delete
-                </button>
 
-            </form>
+            <a href="/{{ strtolower($title) }}/{{ $choosen->id }}/edit" role="button"
+                class="btn btn-warning mx-4"><i class="fa fa-pencil"></i>
+                Edit</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalDelete">
+                <i class="fa fa-trash"></i> Delete
+            </button>
+
         </div>
     </div>
 </div>
@@ -196,8 +197,7 @@
 
 
 <!-- Modal for delete-->
-<div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
-    aria-hidden="true">
+<div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -211,8 +211,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>
-                    Delete</button>
+                <form action="/{{ strtolower($title) . '/' . $choosen->id . '/delete' }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>
+                        Delete</button>
+                </form>
+
             </div>
         </div>
     </div>
@@ -245,7 +250,7 @@
                 }
             }
 
-            if (!$isAssigned && !in_array($batch, $not_assigned_batches)) {
+            if (!$isAssigned && !in_array($batch, $not_assigned_batches )&& $batch->phase!=='Completed') {
                 //puts not assigned batches if the user wants to assign them to  student
                 array_push($not_assigned_batches, $batch);
             }
@@ -279,3 +284,28 @@
         </div>
     </div>
 @endif
+
+<div class="modal fade" id="ModalCertificate" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Generate a Certificate</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to generate a certificate for all the students in the batch?
+            </div>
+            <form action="/generate-pdf/{{ $choosen->id }}" method="POST" class="modal-footer">
+                <div class="col-9">
+                    <input type="checkbox" id="email" name="email" >
+                    <label for="email">Send a completion e-mail</label><br>
+                </div>
+                    @csrf
+                    <button type="submit" class="btn btn-success">generate</button>
+                </form>
+
+        </div>
+    </div>
+</div>

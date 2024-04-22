@@ -9,36 +9,32 @@
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Login</h3>
+                                    <h3 class="text-center font-weight-light my-4">Password Recovery</h3>
                                 </div>
                                 <div class="card-body">
-
-                                    <form action="/user/authentcation" method="POST">
+                                    <div class="small mb-3 text-muted">you can set your password here.</div>
+                                    <form action="/reset/{{$username}}/{{ $token }}" method="POST">
                                         @csrf
                                         <div class="form-floating mb-3">
-
-                                            <input name="username" type="text" id="username" class="form-control"
-                                                placeholder="User name" value="{{ old('username') }}" />
-                                            <label for="username">Username</label>
-                                            @error('username')
+                                            <input class="form-control" id="new_password" type="password"
+                                                name="new_password" value="{{old("new_password")}}" />
+                                            <label for="new_password">Your New Password</label>
+                                            @error('new_password')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
+
                                         <div class="form-floating mb-3">
-                                            <input type="password" name="password" id="password" class="form-control"
-                                                placeholder="Password" />
-                                            <label for="password">Password</label>
-
-                                            @error('password')
+                                            <input class="form-control" id="new_password_confirmation" type="password"
+                                                name="new_password_confirmation" />
+                                            <label for="new_password_confirmation">Repeat your password</label>
+                                            @error('new_password_confirmation')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
+                                       
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="/forgot-password">Forgot Password?</a>
-
-                                            <button class=" btn btn-md btn-primary" type="submit">Sign
-                                                in</button>
-
+                                            <button class="btn btn-primary">Reset Password</button>
                                         </div>
                                     </form>
                                 </div>
@@ -61,10 +57,12 @@
                     </div>
                 </div>
             </footer>
-            <x-flashmessage />
-
         </div>
     </div>
+    <x-flashmessage />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>

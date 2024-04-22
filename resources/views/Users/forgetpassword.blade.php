@@ -8,37 +8,21 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Login</h3>
-                                </div>
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Password Recovery</h3></div>
                                 <div class="card-body">
-
-                                    <form action="/user/authentcation" method="POST">
+                                    <div class="small mb-3 text-muted">Enter your email address and we will send you a link to reset your password.</div>
+                                    <form action="/forgot-password-email" method="POST">
                                         @csrf
                                         <div class="form-floating mb-3">
-
-                                            <input name="username" type="text" id="username" class="form-control"
-                                                placeholder="User name" value="{{ old('username') }}" />
-                                            <label for="username">Username</label>
-                                            @error('username')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input type="password" name="password" id="password" class="form-control"
-                                                placeholder="Password" />
-                                            <label for="password">Password</label>
-
-                                            @error('password')
+                                            <input class="form-control" id="inputEmail" type="email" name="inputEmail" placeholder="name@example.com" />
+                                            <label for="inputEmail">Email address</label>
+                                            @error('inputEmail')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="/forgot-password">Forgot Password?</a>
-
-                                            <button class=" btn btn-md btn-primary" type="submit">Sign
-                                                in</button>
-
+                                            <a class="small" href="/login">Return to login</a>
+                                            <button class=" btn btn-md btn-primary" type="submit">Reset Password</button>
                                         </div>
                                     </form>
                                 </div>
@@ -61,10 +45,10 @@
                     </div>
                 </div>
             </footer>
-            <x-flashmessage />
-
         </div>
     </div>
+<x-flashmessage  />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
 </body>
-
 </html>
