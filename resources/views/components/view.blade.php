@@ -165,28 +165,36 @@
                                 <button type="button"  data-bs-toggle="modal"
                                 data-bs-target="#ModalCertificate" class=" border-0  bg-transparent text-primary"><i
                                         class="fas fa-certificate "></i> Generate a Certificate</button>
-                                {{-- <form action="/generate-pdf/{{ $choosen->id }}" method="POST">
-                                    @csrf
-                                    <button type="submit"
-                                        class=" border-0  d-flex align-items-center  w-100 bg-white text-primary gap-2"><i
-                                            class="fas fa-certificate "></i> Generate a Certificate</button>
-                                </form> --}}
+                                
                             </div>
                         @endif
                     @endif
                 </div>
             </div>
+            @php
+            if($title=='Batch'){
 
+                $auth='batche';
+            }else{
+                $auth=strtolower($title);
+            }
+            @endphp
 
 
             {{-- to show the buttons to edit and delete --}}
-
-            <a href="/{{ strtolower($title) }}/{{ $choosen->id }}/edit" role="button"
+            @if(Auth::user()->can('update '.$auth.'s' ))
+                <a href="/{{ strtolower($title) }}/{{ $choosen->id }}/edit" role="button"
                 class="btn btn-warning mx-4"><i class="fa fa-pencil"></i>
                 Edit</a>
+            @endif
+            
+            @if(Auth::user()->can('delete '.$auth.'s' ))
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalDelete">
                 <i class="fa fa-trash"></i> Delete
             </button>
+                
+            @endif
+            
 
         </div>
     </div>

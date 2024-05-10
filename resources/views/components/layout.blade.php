@@ -30,6 +30,11 @@
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
+                    <li><a class="dropdown-item" href="/user/{{Auth::user()->id}}/edit"><i class="fas fa-user"></i> User account settings</a></li>
+
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
                     <li>
                         <form action="/logout" method="POST">
                             @csrf
@@ -53,22 +58,35 @@
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Tables</div>
-                            <a class="nav-link" href="/students">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Students
-                            </a>
-                            <a class="nav-link" href="/batches">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Batches
-                            </a>
+                        @if (Auth::user()->can('read students'))
+                        <a class="nav-link" href="/students">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Students
+                        </a>
+                        @endif
+                            
+                        @if (Auth::user()->can('read batches'))
+                            
+                        <a class="nav-link" href="/batches">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Batches
+                        </a>
+                        @endif
+
+                        @if (Auth::user()->can('read courses'))
                             <a class="nav-link" href="/courses">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Courses
                             </a>
-                            <a class="nav-link" href="/teachers">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Teachers
-                            </a>
+                        @endif
+                            
+                        @if (Auth::user()->can('read teachers'))
+                            
+                        <a class="nav-link" href="/teachers">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Teachers
+                        </a>
+                        @endif
                         
                             <div class="sb-sidenav-menu-heading">Settings</div>
                             <a class="nav-link" href="/settings">

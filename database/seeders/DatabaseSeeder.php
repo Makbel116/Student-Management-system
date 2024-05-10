@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Batch;
 use App\Models\Place;
 use App\Models\Course;
@@ -10,6 +11,9 @@ use App\Models\Teacher;
 use App\Models\Location;
 use App\Models\Schedule;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,16 +24,62 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(1)->create();
+
+        $permissionNames = [
+            'create users',
+            'read users',
+            'update users',
+            'delete users',
+
+            'create students',
+            'read students',
+            'update students',
+            'delete students',
+
+            'create teachers',
+            'read teachers',
+            'update teachers',
+            'delete teachers',
+
+            'create courses',
+            'read courses',
+            'update courses',
+            'delete courses',
+
+            'create batches',
+            'read batches',
+            'update batches',
+            'delete batches',
+
+            'create roles',
+            'read roles',
+            'update roles',
+            'delete roles',
+
+            'assign permissions',
+            'revoke permissions'
+        ];
+
+        $permissions = [];
+
+        foreach ($permissionNames as $permissionName) {
+            $permissions[] = Permission::create(['name' => $permissionName]);
+        }
+        
+        $role = Role::create(['name' => 'admin']);
+        $role->syncPermissions($permissions);
+
+        $user = User::factory()->create();
+        $user->assignRole($role);
 
         $locations = Location::factory(11)->create();
-        $places= Place::factory(4)->create();
+        $places = Place::factory(4)->create();
 
         //creates 2 teachers 
         for ($i = 0; $i < 2; $i++) {
             Teacher::factory()->create([
                 'location_id' => $locations[$i]->id,
-            
+
             ]);
         }
 
@@ -63,7 +113,7 @@ class DatabaseSeeder extends Seeder
         $batches = Batch::all();
 
         //creates 50 students with unassigned batch
-        for ($i=0; $i <10 ; $i++) { 
+        for ($i = 0; $i < 10; $i++) {
             # code...
             Student::factory(5)->create([
                 'location_id' => $locations[$i]->id

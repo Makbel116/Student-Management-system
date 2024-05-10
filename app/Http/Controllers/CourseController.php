@@ -10,6 +10,15 @@ use Illuminate\Validation\Rule;
 class CourseController extends Controller
 {
     //
+    public function __construct()
+    {
+     $this->middleware('permission:create courses', ['only' => ['create','store']]);
+     $this->middleware('permission:update courses', ['only' => ['edit','update']]);
+     $this->middleware('permission:read courses', ['only' => ['index']]);
+     $this->middleware('permission:delete courses', ['only' => ['destroy']]);
+
+    }
+
 
     public function index()
     {

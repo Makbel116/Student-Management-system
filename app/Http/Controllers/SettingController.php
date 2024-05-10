@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Location;
 use App\Models\Place;
+use App\Models\Location;
 use App\Models\Schedule;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Role;
 
 class SettingController extends Controller
 {
@@ -18,10 +20,11 @@ class SettingController extends Controller
     {
         return view(
             "Settings.index",
-            [
+            [   'roles' => Role::orderBy('name')->get(),
                 'schedules' => Schedule::orderBy('name')->get(),
                 'locations' => Location::orderBy('name')->get(),
-                'places' => Place::orderBy('name')->get()
+                'places' => Place::orderBy('name')->get(),
+                'users' => User::orderBy('name')->get()
             ]
         );
     }

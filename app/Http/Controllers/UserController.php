@@ -10,13 +10,23 @@ use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+     $this->middleware('permission:create users', ['only' => ['store']]);
+     $this->middleware('permission:update users', ['only' => ['edit','update']]);
+     $this->middleware('permission:read users', ['only' => ['user_settings']]);
+     $this->middleware('permission:delete users', ['only' => ['destroy']]);
+
+    }
     //for the home page
     public function index()
     {
@@ -58,6 +68,82 @@ class UserController extends Controller
             )
         );
     }
+    //to get the settings
+
+    public function user_settings(){
+        return view("Users.user_settings",[
+            'users'=>User::all()
+        ]);
+    }
+
+    //to store a user
+
+    public function store(Request $request){
+        $formFields = $request->validate([
+            'name' => ['required'],
+            'username' => ['required', 'min:4', 'no_spaces', Rule::unique('users', 'username')],
+            'email'=> ['required','email'],
+            'password' => ['required', 'min:6',"confirmed"]
+        ]); 
+        $formFields['password']=bcrypt($formFields['password']);
+
+        $user=User::create($formFields);
+        
+        return redirect('/user')->with("message", 'Users Registered Successfully!!!');
+
+    }
+    //to show the edit page
+
+    public function edit(User $user){
+
+        return view("Users.edit",[
+            'roles'=>Role::all(),
+            'user'=>$user
+        ]);
+    }
+
+
+    //to update a user status
+
+    public function update(User $user,Request $request){
+        $formFields = $request->validate([
+            'name' => ['required'],
+            'username' => ['required', 'min:4', 'no_spaces'],
+            'email'=> ['required','email'],
+            'password' => ['required', 'min:6',"confirmed"]
+        ]); 
+
+        $formFields['password']=bcrypt($formFields['password']);
+
+        $assigned_roles = $request->input('assigned_roles', []);
+        $not_assigned_roles = $request->input('not_assigned_roles', []);
+
+        
+        if($assigned_roles){
+            foreach($assigned_roles as $role){
+                $user->removeRole(Role::find($role));
+            }
+        }
+        if($not_assigned_roles){
+            foreach($not_assigned_roles as $role){
+                $user->assignRole(Role::find($role));
+            }
+        }
+        
+        $user->update($formFields);
+
+        return redirect("/user")->with('message', 'role updated successfully');
+
+    }
+    //to delete a user
+
+    public function destroy(Request $request,User $user){
+        $user->delete();
+        return redirect('/user')->with("message", 'User deleted Successfully!!!');
+
+    }
+
+
     //to show the login page
     public function login()
     {

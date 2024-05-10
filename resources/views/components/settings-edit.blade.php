@@ -24,7 +24,6 @@
                             <tbody>
                                 @foreach ($choosen as $choosen)
                                     <tr>
-                                        <td class="col-3">{{ $choosen->id }}</td>
                                         <td class="col-7"> {{ $choosen->name }}</td>
                                         <form action="/{{ strtolower($title) . '/' . $choosen->id . '/delete' }}"
                                             method="POST">

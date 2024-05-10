@@ -11,9 +11,22 @@ use Illuminate\Validation\Rule;
 class TeacherController extends Controller
 {
     //
+
+    public function __construct()
+    {
+     $this->middleware('permission:create teachers', ['only' => ['create','store']]);
+     $this->middleware('permission:update teachers', ['only' => ['edit','update']]);
+     $this->middleware('permission:read teachers', ['only' => ['index']]);
+     $this->middleware('permission:delete teachers', ['only' => ['destroy']]);
+
+    }
+
+
     public function index()
     {
 
+
+        
         return view(
             "Teachers.index",
             [

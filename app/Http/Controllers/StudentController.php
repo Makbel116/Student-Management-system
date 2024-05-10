@@ -9,9 +9,19 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Permission;
 
 class StudentController extends Controller
-{
+{    
+
+     public function __construct()
+    {
+     $this->middleware('permission:create students', ['only' => ['create','store']]);
+     $this->middleware('permission:update students', ['only' => ['edit','update']]);
+     $this->middleware('permission:read students', ['only' => ['index']]);
+     $this->middleware('permission:delete students', ['only' => ['destroy']]);
+
+    }
      //
 
      public function index()

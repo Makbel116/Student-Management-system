@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CourseController;
@@ -58,6 +59,25 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
 
         Route::get('/', 'index');
 
+        //to get user settings 
+
+        Route::get('/user','user_settings');
+
+        //to store users
+
+        Route::post('/user/store','store');
+
+        //to edit users
+
+        Route::get("/user/{user}/edit",'edit');
+
+        //to update users
+
+        Route::put("/user/{user}/update",'update');
+
+        //to delete users
+
+        Route::delete('/user/{user}/delete','destroy');
 
         //user logout
 
@@ -273,6 +293,28 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
         });
     });
 
+    // to handle the roles
+    Route::controller(RoleController::class)->group(function () {
+
+        Route::prefix('role')->group(function(){
+            // to get a role settings page
+            Route::get('/','index');
+
+            //to add a role
+
+            Route::post('/store','store');
+
+            //to edit a role
+            Route::get('/{role}/edit','edit');
+            
+            //to update a role
+
+            Route::put('/{role}/update','update');
+
+            //to delete a route
+            Route::delete('/{role}/delete','destroy');
+        });
+    });
     // certificate
 
     //to generate a certificate

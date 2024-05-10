@@ -12,6 +12,15 @@ use Illuminate\Validation\Rule;
 
 class BatchController extends Controller
 {
+    public function __construct()
+    {
+     $this->middleware('permission:create batches', ['only' => ['create','store']]);
+     $this->middleware('permission:update batches', ['only' => ['edit','update']]);
+     $this->middleware('permission:read batches', ['only' => ['index']]);
+     $this->middleware('permission:delete batches', ['only' => ['destroy']]);
+
+    }
+
     //to get the list of the batches
 
     public function index()

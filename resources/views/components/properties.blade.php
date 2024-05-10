@@ -14,8 +14,18 @@
     </div>
     <div class="row-fluid">
         <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{ $title }} information</h3>
+            <div class="panel-heading row py-3 m-0">
+                <h3 class="col-11 panel-title">{{ $title }} List</h3>
+                <div class="col-1 d-flex  " title="edit {{ strtolower($title) }}">
+                    @php
+                        if ($title == 'Role'||$title== 'User') {
+                            $url = '/'.strtolower($title);
+                        } else {
+                            $url = '/' . strtolower($title) . '/edit';
+                        }
+                    @endphp
+                    <a class="text-white" href="{{ $url }}"><span class="mr-auto fas fa-gear"></span></a>
+                </div>
             </div>
             <div class="panel-body">
                 <div class="row-fluid">
@@ -25,7 +35,6 @@
                         <tbody>
                             @foreach ($choosen as $choosen)
                                 <tr>
-                                    <td>{{ $choosen->id }}</td>
                                     <td>{{ $choosen->name }}</td>
                                 </tr>
                             @endforeach
@@ -34,9 +43,8 @@
 
                 </div>
             </div>
-            <div class="panel-footer">
-                <a  role="button" class="btn  btn-warning " href="/{{ strtolower($title)}}/edit"><i>Edit
-                        {{ $title }}</i></a>
+            <div class="panel-footer p-4">
+
             </div>
         </div>
     </div>

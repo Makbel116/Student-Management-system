@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        Schema::defaultStringLength(191);
+        Schema::defaultStringLength(125);
 
         //to disable a space in the usernames
         Validator::extend('no_spaces', function ($attribute, $value, $parameters, $validator) {
