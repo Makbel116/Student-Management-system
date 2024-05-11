@@ -45,6 +45,12 @@ Route::middleware(['middleware' => 'guest'])->group(function () {
         //user authentcation to login
 
         Route::post("/user/authentcation", 'authentcation');
+
+        //mail
+
+        //to send the email for the user
+
+        Route::post("/forgot-password-email", [MailController::class, 'send_forget_email']);
     });
 });
 
@@ -61,23 +67,23 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
 
         //to get user settings 
 
-        Route::get('/user','user_settings');
+        Route::get('/user', 'user_settings');
 
         //to store users
 
-        Route::post('/user/store','store');
+        Route::post('/user/store', 'store');
 
         //to edit users
 
-        Route::get("/user/{user}/edit",'edit');
+        Route::get("/user/{user}/edit", 'edit');
 
         //to update users
 
-        Route::put("/user/{user}/update",'update');
+        Route::put("/user/{user}/update", 'update');
 
         //to delete users
 
-        Route::delete('/user/{user}/delete','destroy');
+        Route::delete('/user/{user}/delete', 'destroy');
 
         //user logout
 
@@ -296,23 +302,23 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
     // to handle the roles
     Route::controller(RoleController::class)->group(function () {
 
-        Route::prefix('role')->group(function(){
+        Route::prefix('role')->group(function () {
             // to get a role settings page
-            Route::get('/','index');
+            Route::get('/', 'index');
 
             //to add a role
 
-            Route::post('/store','store');
+            Route::post('/store', 'store');
 
             //to edit a role
-            Route::get('/{role}/edit','edit');
-            
+            Route::get('/{role}/edit', 'edit');
+
             //to update a role
 
-            Route::put('/{role}/update','update');
+            Route::put('/{role}/update', 'update');
 
             //to delete a route
-            Route::delete('/{role}/delete','destroy');
+            Route::delete('/{role}/delete', 'destroy');
         });
     });
     // certificate
@@ -320,12 +326,4 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
     //to generate a certificate
 
     Route::post('/generate-pdf/{batch}', [PDFController::class, 'generatePDF']);
-
-
-    //mail
-
-    //to send the email for the user
-
-    Route::post("/forgot-password-email", [MailController::class, 'send_forget_email']);
-    
 });
